@@ -7,14 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD3A92F51CB9898C00465506 /* BGClockCustomizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3A92F41CB9898C00465506 /* BGClockCustomizationViewController.swift */; };
+		CD3A92F71CB98D3A00465506 /* CustomizeClockSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3A92F61CB98D3A00465506 /* CustomizeClockSettingsTableViewController.swift */; };
+		CD3A933E1CBA9DB900465506 /* CustomizeColorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3A933D1CBA9DB900465506 /* CustomizeColorTableViewController.swift */; };
+		CD7A14871C95AD9C00D8E06F /* ClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7A14861C95AD9C00D8E06F /* ClockViewController.swift */; };
 		CD7DBD311C93D3D000ED9F20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD301C93D3D000ED9F20 /* AppDelegate.swift */; };
-		CD7DBD331C93D3D000ED9F20 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD321C93D3D000ED9F20 /* FirstViewController.swift */; };
-		CD7DBD351C93D3D000ED9F20 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD341C93D3D000ED9F20 /* SecondViewController.swift */; };
 		CD7DBD381C93D3D000ED9F20 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD7DBD361C93D3D000ED9F20 /* Main.storyboard */; };
 		CD7DBD3A1C93D3D000ED9F20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD7DBD391C93D3D000ED9F20 /* Assets.xcassets */; };
 		CD7DBD3D1C93D3D000ED9F20 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD7DBD3B1C93D3D000ED9F20 /* LaunchScreen.storyboard */; };
 		CD7DBD481C93D3D000ED9F20 /* BGClockDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD471C93D3D000ED9F20 /* BGClockDemoTests.swift */; };
 		CD7DBD531C93D3D000ED9F20 /* BGClockDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD521C93D3D000ED9F20 /* BGClockDemoUITests.swift */; };
+		CD7DBD611C93D42600ED9F20 /* WebServicesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD601C93D42600ED9F20 /* WebServicesManager.swift */; };
+		CD7DBD631C93D43000ED9F20 /* TimeZoneManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD621C93D43000ED9F20 /* TimeZoneManager.swift */; };
+		CD7DBD651C93D43A00ED9F20 /* TimeZoneLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD641C93D43A00ED9F20 /* TimeZoneLocation.swift */; };
+		CD7DBD701C93D48000ED9F20 /* Coordinates.txt in Resources */ = {isa = PBXBuildFile; fileRef = CD7DBD6E1C93D48000ED9F20 /* Coordinates.txt */; };
+		CD7DBD711C93D48000ED9F20 /* CSwiftV.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD6F1C93D48000ED9F20 /* CSwiftV.swift */; };
+		CD7DBD731C93D49000ED9F20 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD721C93D49000ED9F20 /* SwiftyJSON.swift */; };
+		CD7DBD751C93D4A400ED9F20 /* CityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD741C93D4A400ED9F20 /* CityTableViewController.swift */; };
+		CD7DBD7B1C93D4CF00ED9F20 /* map.html in Resources */ = {isa = PBXBuildFile; fileRef = CD7DBD761C93D4CF00ED9F20 /* map.html */; };
+		CD7DBD7C1C93D4CF00ED9F20 /* map2.html in Resources */ = {isa = PBXBuildFile; fileRef = CD7DBD771C93D4CF00ED9F20 /* map2.html */; };
+		CD7DBD7D1C93D4CF00ED9F20 /* VectorMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD781C93D4CF00ED9F20 /* VectorMath.swift */; };
+		CD7DBD7E1C93D4CF00ED9F20 /* world-50m.json in Resources */ = {isa = PBXBuildFile; fileRef = CD7DBD791C93D4CF00ED9F20 /* world-50m.json */; };
+		CD7DBD7F1C93D4CF00ED9F20 /* world-110m.json in Resources */ = {isa = PBXBuildFile; fileRef = CD7DBD7A1C93D4CF00ED9F20 /* world-110m.json */; };
+		CD7DBD811C93D51500ED9F20 /* BGWorldClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD801C93D51500ED9F20 /* BGWorldClockViewController.swift */; };
+		CD7DBD831C93D77700ED9F20 /* ClockCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD821C93D77700ED9F20 /* ClockCollectionViewCell.swift */; };
+		CD7DBD861C93E69900ED9F20 /* weathericons-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD7DBD841C93E69900ED9F20 /* weathericons-regular-webfont.ttf */; };
+		CD7DBD871C93E69900ED9F20 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD7DBD851C93E69900ED9F20 /* fontawesome-webfont.ttf */; };
+		CDC09B0C1CBDD12D00AC20DC /* BGClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC09B081CBDD12D00AC20DC /* BGClockView.swift */; };
+		CDC09B0D1CBDD12D00AC20DC /* BGFlipTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC09B091CBDD12D00AC20DC /* BGFlipTransition.swift */; };
+		CDC09B0E1CBDD12D00AC20DC /* BGTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC09B0A1CBDD12D00AC20DC /* BGTransitions.swift */; };
+		CDC09B0F1CBDD12D00AC20DC /* BGViewSnapShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC09B0B1CBDD12D00AC20DC /* BGViewSnapShot.swift */; };
+		CDC300761C947D1700EE5A56 /* WorldClockMapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC300751C947D1700EE5A56 /* WorldClockMapAnnotationView.swift */; };
+		CDE2E8831C99850B00A8062E /* WorldClockSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE2E8821C99850B00A8062E /* WorldClockSettingsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,10 +59,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CD3A92F41CB9898C00465506 /* BGClockCustomizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGClockCustomizationViewController.swift; sourceTree = "<group>"; };
+		CD3A92F61CB98D3A00465506 /* CustomizeClockSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizeClockSettingsTableViewController.swift; sourceTree = "<group>"; };
+		CD3A933D1CBA9DB900465506 /* CustomizeColorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizeColorTableViewController.swift; sourceTree = "<group>"; };
+		CD7A14861C95AD9C00D8E06F /* ClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockViewController.swift; sourceTree = "<group>"; };
 		CD7DBD2D1C93D3D000ED9F20 /* BGClockDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BGClockDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7DBD301C93D3D000ED9F20 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CD7DBD321C93D3D000ED9F20 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		CD7DBD341C93D3D000ED9F20 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		CD7DBD371C93D3D000ED9F20 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CD7DBD391C93D3D000ED9F20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD7DBD3C1C93D3D000ED9F20 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +75,28 @@
 		CD7DBD4E1C93D3D000ED9F20 /* BGClockDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BGClockDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7DBD521C93D3D000ED9F20 /* BGClockDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BGClockDemoUITests.swift; sourceTree = "<group>"; };
 		CD7DBD541C93D3D000ED9F20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD7DBD601C93D42600ED9F20 /* WebServicesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServicesManager.swift; sourceTree = "<group>"; };
+		CD7DBD621C93D43000ED9F20 /* TimeZoneManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZoneManager.swift; sourceTree = "<group>"; };
+		CD7DBD641C93D43A00ED9F20 /* TimeZoneLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZoneLocation.swift; sourceTree = "<group>"; };
+		CD7DBD6E1C93D48000ED9F20 /* Coordinates.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Coordinates.txt; sourceTree = "<group>"; };
+		CD7DBD6F1C93D48000ED9F20 /* CSwiftV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSwiftV.swift; sourceTree = "<group>"; };
+		CD7DBD721C93D49000ED9F20 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		CD7DBD741C93D4A400ED9F20 /* CityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityTableViewController.swift; sourceTree = "<group>"; };
+		CD7DBD761C93D4CF00ED9F20 /* map.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = map.html; sourceTree = "<group>"; };
+		CD7DBD771C93D4CF00ED9F20 /* map2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = map2.html; sourceTree = "<group>"; };
+		CD7DBD781C93D4CF00ED9F20 /* VectorMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorMath.swift; sourceTree = "<group>"; };
+		CD7DBD791C93D4CF00ED9F20 /* world-50m.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "world-50m.json"; sourceTree = "<group>"; };
+		CD7DBD7A1C93D4CF00ED9F20 /* world-110m.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "world-110m.json"; sourceTree = "<group>"; };
+		CD7DBD801C93D51500ED9F20 /* BGWorldClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGWorldClockViewController.swift; sourceTree = "<group>"; };
+		CD7DBD821C93D77700ED9F20 /* ClockCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockCollectionViewCell.swift; sourceTree = "<group>"; };
+		CD7DBD841C93E69900ED9F20 /* weathericons-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "weathericons-regular-webfont.ttf"; sourceTree = "<group>"; };
+		CD7DBD851C93E69900ED9F20 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
+		CDC09B081CBDD12D00AC20DC /* BGClockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BGClockView.swift; path = BGClockView/BGClockView.swift; sourceTree = "<group>"; };
+		CDC09B091CBDD12D00AC20DC /* BGFlipTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BGFlipTransition.swift; path = BGClockView/BGFlipTransition.swift; sourceTree = "<group>"; };
+		CDC09B0A1CBDD12D00AC20DC /* BGTransitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BGTransitions.swift; path = BGClockView/BGTransitions.swift; sourceTree = "<group>"; };
+		CDC09B0B1CBDD12D00AC20DC /* BGViewSnapShot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BGViewSnapShot.swift; path = BGClockView/BGViewSnapShot.swift; sourceTree = "<group>"; };
+		CDC300751C947D1700EE5A56 /* WorldClockMapAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldClockMapAnnotationView.swift; sourceTree = "<group>"; };
+		CDE2E8821C99850B00A8062E /* WorldClockSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldClockSettingsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +124,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD3A92F31CB988EF00465506 /* BGClockView */ = {
+			isa = PBXGroup;
+			children = (
+				CDC09B081CBDD12D00AC20DC /* BGClockView.swift */,
+				CDC09B091CBDD12D00AC20DC /* BGFlipTransition.swift */,
+				CDC09B0A1CBDD12D00AC20DC /* BGTransitions.swift */,
+				CDC09B0B1CBDD12D00AC20DC /* BGViewSnapShot.swift */,
+			);
+			name = BGClockView;
+			sourceTree = "<group>";
+		};
 		CD7DBD241C93D3D000ED9F20 = {
 			isa = PBXGroup;
 			children = (
@@ -99,10 +158,31 @@
 		CD7DBD2F1C93D3D000ED9F20 /* BGClockDemo */ = {
 			isa = PBXGroup;
 			children = (
-				CD7DBD301C93D3D000ED9F20 /* AppDelegate.swift */,
-				CD7DBD321C93D3D000ED9F20 /* FirstViewController.swift */,
-				CD7DBD341C93D3D000ED9F20 /* SecondViewController.swift */,
+				CD3A92F31CB988EF00465506 /* BGClockView */,
 				CD7DBD361C93D3D000ED9F20 /* Main.storyboard */,
+				CD7DBD301C93D3D000ED9F20 /* AppDelegate.swift */,
+				CD7DBD801C93D51500ED9F20 /* BGWorldClockViewController.swift */,
+				CD3A92F41CB9898C00465506 /* BGClockCustomizationViewController.swift */,
+				CDC300751C947D1700EE5A56 /* WorldClockMapAnnotationView.swift */,
+				CDE2E8821C99850B00A8062E /* WorldClockSettingsTableViewController.swift */,
+				CD3A92F61CB98D3A00465506 /* CustomizeClockSettingsTableViewController.swift */,
+				CD3A933D1CBA9DB900465506 /* CustomizeColorTableViewController.swift */,
+				CD7DBD821C93D77700ED9F20 /* ClockCollectionViewCell.swift */,
+				CD7A14861C95AD9C00D8E06F /* ClockViewController.swift */,
+				CD7DBD741C93D4A400ED9F20 /* CityTableViewController.swift */,
+				CD7DBD601C93D42600ED9F20 /* WebServicesManager.swift */,
+				CD7DBD621C93D43000ED9F20 /* TimeZoneManager.swift */,
+				CD7DBD641C93D43A00ED9F20 /* TimeZoneLocation.swift */,
+				CD7DBD781C93D4CF00ED9F20 /* VectorMath.swift */,
+				CD7DBD6F1C93D48000ED9F20 /* CSwiftV.swift */,
+				CD7DBD721C93D49000ED9F20 /* SwiftyJSON.swift */,
+				CD7DBD6E1C93D48000ED9F20 /* Coordinates.txt */,
+				CD7DBD761C93D4CF00ED9F20 /* map.html */,
+				CD7DBD771C93D4CF00ED9F20 /* map2.html */,
+				CD7DBD791C93D4CF00ED9F20 /* world-50m.json */,
+				CD7DBD7A1C93D4CF00ED9F20 /* world-110m.json */,
+				CD7DBD841C93E69900ED9F20 /* weathericons-regular-webfont.ttf */,
+				CD7DBD851C93E69900ED9F20 /* fontawesome-webfont.ttf */,
 				CD7DBD391C93D3D000ED9F20 /* Assets.xcassets */,
 				CD7DBD3B1C93D3D000ED9F20 /* LaunchScreen.storyboard */,
 				CD7DBD3E1C93D3D000ED9F20 /* Info.plist */,
@@ -196,6 +276,7 @@
 				TargetAttributes = {
 					CD7DBD2C1C93D3D000ED9F20 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 8DDUQH2RUD;
 					};
 					CD7DBD421C93D3D000ED9F20 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -232,7 +313,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD7DBD7E1C93D4CF00ED9F20 /* world-50m.json in Resources */,
+				CD7DBD7C1C93D4CF00ED9F20 /* map2.html in Resources */,
+				CD7DBD701C93D48000ED9F20 /* Coordinates.txt in Resources */,
+				CD7DBD7F1C93D4CF00ED9F20 /* world-110m.json in Resources */,
 				CD7DBD3D1C93D3D000ED9F20 /* LaunchScreen.storyboard in Resources */,
+				CD7DBD861C93E69900ED9F20 /* weathericons-regular-webfont.ttf in Resources */,
+				CD7DBD7B1C93D4CF00ED9F20 /* map.html in Resources */,
+				CD7DBD871C93E69900ED9F20 /* fontawesome-webfont.ttf in Resources */,
 				CD7DBD3A1C93D3D000ED9F20 /* Assets.xcassets in Resources */,
 				CD7DBD381C93D3D000ED9F20 /* Main.storyboard in Resources */,
 			);
@@ -259,9 +347,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD7DBD351C93D3D000ED9F20 /* SecondViewController.swift in Sources */,
+				CDC09B0D1CBDD12D00AC20DC /* BGFlipTransition.swift in Sources */,
+				CDC09B0E1CBDD12D00AC20DC /* BGTransitions.swift in Sources */,
+				CD3A92F51CB9898C00465506 /* BGClockCustomizationViewController.swift in Sources */,
+				CDE2E8831C99850B00A8062E /* WorldClockSettingsTableViewController.swift in Sources */,
+				CD7DBD7D1C93D4CF00ED9F20 /* VectorMath.swift in Sources */,
+				CD7DBD611C93D42600ED9F20 /* WebServicesManager.swift in Sources */,
+				CD7DBD631C93D43000ED9F20 /* TimeZoneManager.swift in Sources */,
+				CDC09B0F1CBDD12D00AC20DC /* BGViewSnapShot.swift in Sources */,
+				CD7DBD731C93D49000ED9F20 /* SwiftyJSON.swift in Sources */,
+				CDC300761C947D1700EE5A56 /* WorldClockMapAnnotationView.swift in Sources */,
+				CD3A92F71CB98D3A00465506 /* CustomizeClockSettingsTableViewController.swift in Sources */,
+				CD7DBD651C93D43A00ED9F20 /* TimeZoneLocation.swift in Sources */,
+				CD7DBD751C93D4A400ED9F20 /* CityTableViewController.swift in Sources */,
+				CD7DBD811C93D51500ED9F20 /* BGWorldClockViewController.swift in Sources */,
+				CD7A14871C95AD9C00D8E06F /* ClockViewController.swift in Sources */,
+				CD7DBD831C93D77700ED9F20 /* ClockCollectionViewCell.swift in Sources */,
+				CDC09B0C1CBDD12D00AC20DC /* BGClockView.swift in Sources */,
+				CD7DBD711C93D48000ED9F20 /* CSwiftV.swift in Sources */,
 				CD7DBD311C93D3D000ED9F20 /* AppDelegate.swift in Sources */,
-				CD7DBD331C93D3D000ED9F20 /* FirstViewController.swift in Sources */,
+				CD3A933E1CBA9DB900465506 /* CustomizeColorTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,10 +508,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = BGClockDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = bradgayman.BGClockDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -414,10 +523,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = BGClockDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = bradgayman.BGClockDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -488,6 +601,7 @@
 				CD7DBD591C93D3D000ED9F20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CD7DBD5A1C93D3D000ED9F20 /* Build configuration list for PBXNativeTarget "BGClockDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +610,7 @@
 				CD7DBD5C1C93D3D000ED9F20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CD7DBD5D1C93D3D000ED9F20 /* Build configuration list for PBXNativeTarget "BGClockDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +619,7 @@
 				CD7DBD5F1C93D3D000ED9F20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
