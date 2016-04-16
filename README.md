@@ -10,6 +10,8 @@ Swift subclass of UIView that displays and functions as an analog clock with var
 # Installation
 Download sample app and copy files in BGClockView folder into your project.
 
+(Side note: to get all of the features of the demo app you can add Weather Underground API key to WebServicesManager.swift `let kWUndergroundAPIKey = ""`)
+
 # Use
 BGClockView can be initialized either in Storyboard/Xib or through frames. Once initialized, BGClockView is customizable. 
 
