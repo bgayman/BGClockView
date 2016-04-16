@@ -455,7 +455,7 @@ class BGClockView: UIView {
         self.displayLink?.removeFromRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
     }
     
-    func setClockToTimeWithTime(day:Int,hours:Int,minute:Int,second:Int,weekday:Int)
+    func setClockToTime(day:Int,hours:Int,minute:Int,second:Int,weekday:Int)
     {
         
         let secondsFloat     = CGFloat(second)
