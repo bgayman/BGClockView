@@ -29,6 +29,7 @@ self.clockView.continuous = false
 self.clockView.start()
 ```
 Will produce this rather hideous clock.
+
 <img style="border: gray 1px solid;" width="320px" src="./Screenshot5.png"></img>
 
 # Features
