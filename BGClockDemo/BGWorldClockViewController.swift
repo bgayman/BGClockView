@@ -274,7 +274,6 @@ class BGWorldClockViewController: UIViewController,UICollectionViewDataSource,UI
 
     func webViewDidFinishLoad(webView: UIWebView) {
         self.createMask()
-        //self.addMapAnnotations()
     }
     
     func redrawMap()

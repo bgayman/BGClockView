@@ -49,7 +49,7 @@ struct TimeZoneLocation
             }
             else
             {
-                if self.angleBetweenSurfaceAndSunlightForLat(Float(self.latitude)!, longitude: Float(self.longitude)!) > 1 {
+                if self.angleBetweenSurfaceAndSunlightForLat(Float(self.latitude)!, longitude: Float(self.longitude)!) > 0 {
                     return true
                 }
                 return false

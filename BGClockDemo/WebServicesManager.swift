@@ -14,7 +14,7 @@ public let kUpdateWeatherNotification = "weatherupdate"
 typealias MainThreadCompletionBlock = (Bool,TimeZoneLocation)->()
 
 class WebServiceManager: NSObject {
-    let kWUndergroundAPIKey = ""//"b9a5dc41152bb865"
+    let kWUndergroundAPIKey = ""
     
     var kWUndergroundConditionURLString:String{
         return "http://api.wunderground.com/api/" + kWUndergroundAPIKey + "/conditions/astronomy/q/"
