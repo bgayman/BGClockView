@@ -91,7 +91,7 @@ If using autolayout, this method should be called after the layout engine has fi
 #Gotcha's
 Some properties are overloaded. And some properties don't apply to all clock faces. You can use the demo app's customization tab to find these.
 
-Also, **🙀 Please forgive the incredibly confusing code in some of the classes. This is my first Swift project and optional chaining and other Swift features could have been better used amoungst other things🙀**
+Also, **🙀 Please forgive the incredibly confusing code in some of the classes. This is my first Swift project and optional chaining and other Swift features could have been better used amongst other things🙀**
 
 #License
 This project is licensed under The MIT License (MIT)
