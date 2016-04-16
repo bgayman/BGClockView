@@ -77,7 +77,17 @@ clockView.hourHandImage = UIImage(named: "hourHand")
 clockView.minuteHandImage = UIImage(named: "minuteHand")
 clockView.secondHandImage = UIImage(named: "secondHand")
 ```
+###Time Zones
+You can set a clock's time zone through the `timeZoneNameString`
 
+###Static times
+If you would like to use BGClockView to display a static time you can call `setClockToTime(day:Int,hour:Int,minute:Int,second:Int,weekday:Int)`
+For example:
+```Swift
+self.clockView.setClockToTime(1, hour: 10, minute: 9, second: 30, weekday: 6)
+```
+Will set the clock to the Saturday, the 1st, 10:09:30 am
+If using autolayout this method should be called after the layout engine has finished its passes e.g. `viewDidLayoutSubviews`
 #Gotcha's
 Some properties are overloaded. And some properties don't apply to all clock faces. You can use the demo app's customization tab to find these.
 
