@@ -46,9 +46,21 @@ class BGClockView: UIView {
     private var chronosSecondHandTop:            UIView?
     private var chronosSecondHandBottom:         UIView?
     private var dateLabel:                       UILabel?
+    
+    /**
+     * The time zone name for the time displayed on the clock, for example `America/New_York`. A complete list is available by calling `NSTimeZone.knownTimeZoneNames()`
+     */
     var timeZoneNameString:                      String?
     private var displayLink:                     CADisplayLink?
+    
+    /**
+     * Bool that determines if the second hand should sweep continously or tick by the second.
+     */
     var continuous =                             true
+    
+    /**
+     * Bool that determines if clock hands have drop shadows.
+     */
     var hasDropShadow =                          false{
         didSet{
             self.secHand.hasDropShadow = self.hasDropShadow
@@ -60,12 +72,19 @@ class BGClockView: UIView {
             self.hourHand.setNeedsDisplay()
         }
     }
+    
+    /**
+     * Bool that determines if clock face shows a date string. This applies to most but not all clock face
+     */
     var hideDateLabel = false{
         didSet{
             self.dateLabel?.hidden = self.hideDateLabel
         }
     }
     
+    /**
+     * UIColor that sets the color for larger five-minute tick marks on clock face
+     */
     var minuteTickColor:UIColor{
         didSet{
             self.clockFace.minuteTickColor = self.minuteTickColor
@@ -73,6 +92,9 @@ class BGClockView: UIView {
         }
     }
     
+    /**
+     * UIColor that sets the color for smaller tick marks on clock face
+     */
     var secondTickColor:UIColor{
         didSet{
             self.clockFace.secondTickColor = self.secondTickColor
@@ -80,6 +102,9 @@ class BGClockView: UIView {
         }
     }
     
+    /**
+     * UIColor that sets the color for numerals and text on clock face
+     */
     var textColor:UIColor{
         didSet{
             self.clockFace.textColor = self.textColor
@@ -87,6 +112,9 @@ class BGClockView: UIView {
         }
     }
     
+    /**
+     * UIColor that sets the color for the hour hand
+     */
     var hourHandColor:UIColor{
         didSet{
             self.hourHand.handColor = self.hourHandColor
@@ -94,6 +122,9 @@ class BGClockView: UIView {
         }
     }
     
+    /**
+     * UIColor that sets the color for minute hand
+     */
     var minuteHandColor:UIColor{
         didSet{
             self.minHand.handColor = self.minuteHandColor
@@ -101,6 +132,9 @@ class BGClockView: UIView {
         }
     }
     
+    /**
+     * UIColor that sets the color for second hand
+     */
     var secondHandColor:UIColor{
         didSet{
             self.secHand.handColor = self.secondHandColor
@@ -108,6 +142,9 @@ class BGClockView: UIView {
         }
     }
     
+    /**
+     * UIColor that sets the center "screw"
+     */
     var screwColor:UIColor{
         didSet{
             self.secHand.secondHandScrewColor = self.screwColor
@@ -115,6 +152,9 @@ class BGClockView: UIView {
         }
     }
     
+    /**
+     * UIFont used for numerals and text on clock face. The font size will be set by the clock view so can be arbitary.
+     */
     var faceFont:UIFont{
         didSet{
             self.clockFace.faceFont = self.faceFont
@@ -122,6 +162,9 @@ class BGClockView: UIView {
         }
     }
     
+    /**
+     * FaceStyle used to draw the clock's face. This property is ignored if clockFaceImage is set
+     */
     var face: FaceStyle {
         didSet {
             for view in self.subviews{
@@ -131,6 +174,9 @@ class BGClockView: UIView {
         }
     }
     
+    /**
+     * HandStyle used to draw the clock's hands. This property is ignored if andy of the clock hand images are set
+     */
     var hand: HandStyle{
         didSet{
             self.secHand.removeFromSuperview()
@@ -141,6 +187,10 @@ class BGClockView: UIView {
     }
     
     private var secondHandImageView:UIImageView?
+    
+    /**
+     * UIImage used to as the clock's second hand. Image should have hand pointing to 12 o'clock.
+     */
     var secondHandImage:UIImage?{
         didSet{
             if self.secondHandImageView?.superview != nil
@@ -158,6 +208,10 @@ class BGClockView: UIView {
     }
     
     private var minuteHandImageView:UIImageView?
+    
+    /**
+     * UIImage used to as the clock's minute hand. Image should have hand pointing to 12 o'clock.
+     */
     var minuteHandImage:UIImage?{
         didSet{
             if self.minuteHandImageView?.superview != nil
@@ -175,6 +229,10 @@ class BGClockView: UIView {
     }
     
     private var hourHandImageView:UIImageView?
+    
+    /**
+     * UIImage used to as the clock's hour hand. Image should have hand pointing to 12 o'clock.
+     */
     var hourHandImage:UIImage?{
         didSet{
             if self.hourHandImageView?.superview != nil
@@ -192,6 +250,10 @@ class BGClockView: UIView {
     }
     
     private var clockFaceImageView:UIImageView?
+    
+    /**
+     * UIImage used to as the clock's face.
+     */
     var clockFaceImage:UIImage?{
         didSet{
             if self.clockFaceImageView?.superview != nil
@@ -444,17 +506,31 @@ class BGClockView: UIView {
         
     }
     
+    /**
+     * Begin animating the clock
+     */
     func start()
     {
         self.displayLink = CADisplayLink(target: self, selector: #selector(BGClockView.updateClock))
         self.displayLink?.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
     }
     
+    /**
+     * Stop animating the clock
+     */
     func stop()
     {
         self.displayLink?.removeFromRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
     }
     
+    /**
+     * Set the clock to a specified time
+     * Parameter: day is the day of the month
+     * Parameter: hours is the hour of the day with 0 being midnight and 23 being 11 pm
+     * Parameter: minute is the minute of the hour
+     * Parameter: second is the seconds of the minute
+     * Parameter: weekday is the day of the week 1 being Sunday and 7 being Saturday (only used with .Chrono face)
+     */
     func setClockToTime(day:Int,hours:Int,minute:Int,second:Int,weekday:Int)
     {
         
