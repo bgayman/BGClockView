@@ -89,9 +89,30 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gYa-yI-dq8">
                                 <rect key="frame" x="0.0" y="273" width="414" height="414"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nightMap" translatesAutoresizingMaskIntoConstraints="NO" id="pjj-Mm-gug">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dayMap" translatesAutoresizingMaskIntoConstraints="NO" id="don-V0-Cco">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                                    </imageView>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="biX-CQ-3Ye">
+                                        <rect key="frame" x="197" y="197" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="pjj-Mm-gug" secondAttribute="trailing" id="8GS-H9-vPs"/>
+                                    <constraint firstItem="biX-CQ-3Ye" firstAttribute="centerX" secondItem="gYa-yI-dq8" secondAttribute="centerX" id="BU3-w9-Zz7"/>
+                                    <constraint firstAttribute="bottom" secondItem="don-V0-Cco" secondAttribute="bottom" id="JZk-2g-age"/>
+                                    <constraint firstItem="pjj-Mm-gug" firstAttribute="top" secondItem="gYa-yI-dq8" secondAttribute="top" id="Lci-TI-egB"/>
+                                    <constraint firstItem="don-V0-Cco" firstAttribute="leading" secondItem="gYa-yI-dq8" secondAttribute="leading" id="MaC-7B-geW"/>
+                                    <constraint firstItem="don-V0-Cco" firstAttribute="top" secondItem="gYa-yI-dq8" secondAttribute="top" id="QPt-N0-A74"/>
+                                    <constraint firstAttribute="bottom" secondItem="pjj-Mm-gug" secondAttribute="bottom" id="VnU-AO-jZc"/>
+                                    <constraint firstAttribute="trailing" secondItem="don-V0-Cco" secondAttribute="trailing" id="g4n-7e-mhC"/>
+                                    <constraint firstItem="biX-CQ-3Ye" firstAttribute="centerY" secondItem="gYa-yI-dq8" secondAttribute="centerY" id="l1f-0q-Ewb"/>
                                     <constraint firstAttribute="width" secondItem="gYa-yI-dq8" secondAttribute="height" multiplier="1:1" id="x44-kW-N2o"/>
+                                    <constraint firstItem="pjj-Mm-gug" firstAttribute="leading" secondItem="gYa-yI-dq8" secondAttribute="leading" id="z4Q-Vz-XZ2"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hwO-rr-K55">
@@ -206,11 +227,13 @@
                             <constraint firstItem="hwO-rr-K55" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" constant="-20" id="fY1-rA-GZg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gYa-yI-dq8" secondAttribute="trailing" constant="-20" id="gf6-kc-x4M"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hwO-rr-K55" secondAttribute="trailing" constant="-20" id="kUC-Kt-Oos"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gYa-yI-dq8" secondAttribute="trailing" constant="-20" id="q37-92-kZW"/>
                             <constraint firstItem="hwO-rr-K55" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="rSx-s3-9YT"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="gYa-yI-dq8" secondAttribute="bottom" id="sK7-m0-Uz9"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="Lmy-2c-Lmj"/>
                                 <exclude reference="gf6-kc-x4M"/>
                             </mask>
                         </variation>
@@ -233,9 +256,12 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="biX-CQ-3Ye" id="Vis-yE-Cdj"/>
                         <outlet property="collectionView" destination="hwO-rr-K55" id="Ddo-P3-A2g"/>
+                        <outlet property="dayMapImageView" destination="don-V0-Cco" id="GMo-U3-Qky"/>
+                        <outlet property="imageViewHolder" destination="gYa-yI-dq8" id="YQf-Rb-N7p"/>
+                        <outlet property="nightMapImageView" destination="pjj-Mm-gug" id="5tH-uu-j0o"/>
                         <outlet property="settingsButton" destination="FbV-KV-RdF" id="L2N-ug-1Zv"/>
-                        <outlet property="webViewHolder" destination="gYa-yI-dq8" id="cMx-oP-tSf"/>
                         <segue destination="V6f-wm-kAP" kind="show" identifier="ShowClock" id="XKD-2l-cWz"/>
                     </connections>
                 </viewController>
@@ -1747,7 +1773,9 @@
     </scenes>
     <resources>
         <image name="clockIcon" width="25" height="25"/>
+        <image name="dayMap" width="512" height="512"/>
         <image name="globe" width="25" height="25"/>
+        <image name="nightMap" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="bfi-RH-W3p"/>

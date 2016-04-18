@@ -24,11 +24,7 @@
 		CD7DBD711C93D48000ED9F20 /* CSwiftV.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD6F1C93D48000ED9F20 /* CSwiftV.swift */; };
 		CD7DBD731C93D49000ED9F20 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD721C93D49000ED9F20 /* SwiftyJSON.swift */; };
 		CD7DBD751C93D4A400ED9F20 /* CityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD741C93D4A400ED9F20 /* CityTableViewController.swift */; };
-		CD7DBD7B1C93D4CF00ED9F20 /* map.html in Resources */ = {isa = PBXBuildFile; fileRef = CD7DBD761C93D4CF00ED9F20 /* map.html */; };
-		CD7DBD7C1C93D4CF00ED9F20 /* map2.html in Resources */ = {isa = PBXBuildFile; fileRef = CD7DBD771C93D4CF00ED9F20 /* map2.html */; };
 		CD7DBD7D1C93D4CF00ED9F20 /* VectorMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD781C93D4CF00ED9F20 /* VectorMath.swift */; };
-		CD7DBD7E1C93D4CF00ED9F20 /* world-50m.json in Resources */ = {isa = PBXBuildFile; fileRef = CD7DBD791C93D4CF00ED9F20 /* world-50m.json */; };
-		CD7DBD7F1C93D4CF00ED9F20 /* world-110m.json in Resources */ = {isa = PBXBuildFile; fileRef = CD7DBD7A1C93D4CF00ED9F20 /* world-110m.json */; };
 		CD7DBD811C93D51500ED9F20 /* BGWorldClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD801C93D51500ED9F20 /* BGWorldClockViewController.swift */; };
 		CD7DBD831C93D77700ED9F20 /* ClockCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD821C93D77700ED9F20 /* ClockCollectionViewCell.swift */; };
 		CD7DBD861C93E69900ED9F20 /* weathericons-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD7DBD841C93E69900ED9F20 /* weathericons-regular-webfont.ttf */; };
@@ -37,6 +33,11 @@
 		CDC09B0D1CBDD12D00AC20DC /* BGFlipTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC09B091CBDD12D00AC20DC /* BGFlipTransition.swift */; };
 		CDC09B0E1CBDD12D00AC20DC /* BGTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC09B0A1CBDD12D00AC20DC /* BGTransitions.swift */; };
 		CDC09B0F1CBDD12D00AC20DC /* BGViewSnapShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC09B0B1CBDD12D00AC20DC /* BGViewSnapShot.swift */; };
+		CDC09B151CC44A4200AC20DC /* 320.json in Resources */ = {isa = PBXBuildFile; fileRef = CDC09B101CC44A4200AC20DC /* 320.json */; };
+		CDC09B161CC44A4200AC20DC /* 375.json in Resources */ = {isa = PBXBuildFile; fileRef = CDC09B111CC44A4200AC20DC /* 375.json */; };
+		CDC09B171CC44A4200AC20DC /* 414.json in Resources */ = {isa = PBXBuildFile; fileRef = CDC09B121CC44A4200AC20DC /* 414.json */; };
+		CDC09B181CC44A4200AC20DC /* 768.json in Resources */ = {isa = PBXBuildFile; fileRef = CDC09B131CC44A4200AC20DC /* 768.json */; };
+		CDC09B191CC44A4200AC20DC /* 1024.json in Resources */ = {isa = PBXBuildFile; fileRef = CDC09B141CC44A4200AC20DC /* 1024.json */; };
 		CDC300761C947D1700EE5A56 /* WorldClockMapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC300751C947D1700EE5A56 /* WorldClockMapAnnotationView.swift */; };
 		CDE2E8831C99850B00A8062E /* WorldClockSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE2E8821C99850B00A8062E /* WorldClockSettingsTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -82,11 +83,7 @@
 		CD7DBD6F1C93D48000ED9F20 /* CSwiftV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSwiftV.swift; sourceTree = "<group>"; };
 		CD7DBD721C93D49000ED9F20 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		CD7DBD741C93D4A400ED9F20 /* CityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityTableViewController.swift; sourceTree = "<group>"; };
-		CD7DBD761C93D4CF00ED9F20 /* map.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = map.html; sourceTree = "<group>"; };
-		CD7DBD771C93D4CF00ED9F20 /* map2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = map2.html; sourceTree = "<group>"; };
 		CD7DBD781C93D4CF00ED9F20 /* VectorMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorMath.swift; sourceTree = "<group>"; };
-		CD7DBD791C93D4CF00ED9F20 /* world-50m.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "world-50m.json"; sourceTree = "<group>"; };
-		CD7DBD7A1C93D4CF00ED9F20 /* world-110m.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "world-110m.json"; sourceTree = "<group>"; };
 		CD7DBD801C93D51500ED9F20 /* BGWorldClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGWorldClockViewController.swift; sourceTree = "<group>"; };
 		CD7DBD821C93D77700ED9F20 /* ClockCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockCollectionViewCell.swift; sourceTree = "<group>"; };
 		CD7DBD841C93E69900ED9F20 /* weathericons-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "weathericons-regular-webfont.ttf"; sourceTree = "<group>"; };
@@ -95,6 +92,11 @@
 		CDC09B091CBDD12D00AC20DC /* BGFlipTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BGFlipTransition.swift; path = BGClockView/BGFlipTransition.swift; sourceTree = "<group>"; };
 		CDC09B0A1CBDD12D00AC20DC /* BGTransitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BGTransitions.swift; path = BGClockView/BGTransitions.swift; sourceTree = "<group>"; };
 		CDC09B0B1CBDD12D00AC20DC /* BGViewSnapShot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BGViewSnapShot.swift; path = BGClockView/BGViewSnapShot.swift; sourceTree = "<group>"; };
+		CDC09B101CC44A4200AC20DC /* 320.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 320.json; sourceTree = "<group>"; };
+		CDC09B111CC44A4200AC20DC /* 375.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 375.json; sourceTree = "<group>"; };
+		CDC09B121CC44A4200AC20DC /* 414.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 414.json; sourceTree = "<group>"; };
+		CDC09B131CC44A4200AC20DC /* 768.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 768.json; sourceTree = "<group>"; };
+		CDC09B141CC44A4200AC20DC /* 1024.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 1024.json; sourceTree = "<group>"; };
 		CDC300751C947D1700EE5A56 /* WorldClockMapAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldClockMapAnnotationView.swift; sourceTree = "<group>"; };
 		CDE2E8821C99850B00A8062E /* WorldClockSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldClockSettingsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,10 +179,11 @@
 				CD7DBD6F1C93D48000ED9F20 /* CSwiftV.swift */,
 				CD7DBD721C93D49000ED9F20 /* SwiftyJSON.swift */,
 				CD7DBD6E1C93D48000ED9F20 /* Coordinates.txt */,
-				CD7DBD761C93D4CF00ED9F20 /* map.html */,
-				CD7DBD771C93D4CF00ED9F20 /* map2.html */,
-				CD7DBD791C93D4CF00ED9F20 /* world-50m.json */,
-				CD7DBD7A1C93D4CF00ED9F20 /* world-110m.json */,
+				CDC09B101CC44A4200AC20DC /* 320.json */,
+				CDC09B111CC44A4200AC20DC /* 375.json */,
+				CDC09B121CC44A4200AC20DC /* 414.json */,
+				CDC09B131CC44A4200AC20DC /* 768.json */,
+				CDC09B141CC44A4200AC20DC /* 1024.json */,
 				CD7DBD841C93E69900ED9F20 /* weathericons-regular-webfont.ttf */,
 				CD7DBD851C93E69900ED9F20 /* fontawesome-webfont.ttf */,
 				CD7DBD391C93D3D000ED9F20 /* Assets.xcassets */,
@@ -313,15 +316,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD7DBD7E1C93D4CF00ED9F20 /* world-50m.json in Resources */,
-				CD7DBD7C1C93D4CF00ED9F20 /* map2.html in Resources */,
 				CD7DBD701C93D48000ED9F20 /* Coordinates.txt in Resources */,
-				CD7DBD7F1C93D4CF00ED9F20 /* world-110m.json in Resources */,
+				CDC09B161CC44A4200AC20DC /* 375.json in Resources */,
+				CDC09B181CC44A4200AC20DC /* 768.json in Resources */,
 				CD7DBD3D1C93D3D000ED9F20 /* LaunchScreen.storyboard in Resources */,
 				CD7DBD861C93E69900ED9F20 /* weathericons-regular-webfont.ttf in Resources */,
-				CD7DBD7B1C93D4CF00ED9F20 /* map.html in Resources */,
+				CDC09B151CC44A4200AC20DC /* 320.json in Resources */,
+				CDC09B171CC44A4200AC20DC /* 414.json in Resources */,
 				CD7DBD871C93E69900ED9F20 /* fontawesome-webfont.ttf in Resources */,
 				CD7DBD3A1C93D3D000ED9F20 /* Assets.xcassets in Resources */,
+				CDC09B191CC44A4200AC20DC /* 1024.json in Resources */,
 				CD7DBD381C93D3D000ED9F20 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
