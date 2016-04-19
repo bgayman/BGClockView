@@ -21,6 +21,8 @@ class BGWorldClockViewController: UIViewController,UICollectionViewDataSource,UI
     @IBOutlet weak var settingsButton: UIBarButtonItem!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    var lastMaskUpdate = NSDate()
+    
     var sunsetPointArray = [CGPoint]()
     lazy var pointsDictionary:JSON = {
         let fileName = String(Int(self.view.bounds.size.width))
@@ -61,13 +63,18 @@ class BGWorldClockViewController: UIViewController,UICollectionViewDataSource,UI
             }
         }
         NSTimer.scheduledTimerWithTimeInterval(60.0 * 2.0, target: self, selector: #selector(BGWorldClockViewController.updateClocks), userInfo: nil, repeats: true)
-        
+        self.modelSunlightCurve()
     }
 
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
-        self.modelSunlightCurve()
+        
+        if self.lastMaskUpdate.timeIntervalSinceDate(NSDate()) < -60 * 10
+        {
+            self.modelSunlightCurve()
+        }
+        
         self.navigationController?.navigationBar.tintColor = UIColor.blackColor()
         self.navigationController?.navigationBar.shadowImage = nil
         self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
@@ -197,6 +204,7 @@ class BGWorldClockViewController: UIViewController,UICollectionViewDataSource,UI
     func createMask()
     {
         self.dayMapImageView.layer.mask = nil
+        self.dayMapImageView.image = UIImage(named: "dayMap")
         let maskPath = UIBezierPath()
         let smallRadius:CGFloat = self.dayMapImageView.bounds.size.width * 0.0065
         let largeRadius:CGFloat = smallRadius * 5.25
@@ -215,7 +223,7 @@ class BGWorldClockViewController: UIViewController,UICollectionViewDataSource,UI
             
             let radius = max((1 - CGFloat(minHypot) / (self.dayMapImageView.bounds.size.width * 0.5)) * largeRadius,smallRadius)
             let circleRect = CGRect(x: point.x - radius, y: point.y - radius, width: radius * 2.0, height: radius * 2.0)
-            let circlePath = UIBezierPath(/*ovalInR*/rect:circleRect)
+            let circlePath = UIBezierPath(rect:circleRect)
             maskPath.appendPath(circlePath)
         }
         maskPath.closePath()
@@ -225,8 +233,15 @@ class BGWorldClockViewController: UIViewController,UICollectionViewDataSource,UI
             shapeMask.path = maskPath.CGPath
             self.dayMapImageView.layer.mask = shapeMask
             self.dayMapImageView.layer.mask?.setNeedsDisplay()
+        
             self.activityIndicator.hidden = true
             self.activityIndicator.stopAnimating()
+            
+            let map = BGViewSnapShot.renderImageFromView(self.imageViewHolder)
+            self.dayMapImageView.layer.mask = nil
+            self.dayMapImageView.image = map
+            self.lastMaskUpdate = NSDate()
+            
             
         })
         
@@ -255,6 +270,7 @@ class BGWorldClockViewController: UIViewController,UICollectionViewDataSource,UI
             pointingFromEarthToSun = pointingFromEarthToSun + seasonOffset
             
             pointingFromEarthToSun.normalized()
+            var count = 0
             var u  = 90.0
             while u > -90.0 {
                 var v = -180.0
@@ -269,10 +285,20 @@ class BGWorldClockViewController: UIViewController,UICollectionViewDataSource,UI
                     
                     let angleBetweenSurfaceAndSunlight = pointingFromEarthToSun.dot(earthNormal)
                     
-                    if angleBetweenSurfaceAndSunlight > 0 //&& angleBetweenSurfaceAndSunlight < 0.15
+                    if angleBetweenSurfaceAndSunlight > 0 && angleBetweenSurfaceAndSunlight < 0.10
                     {
                         let latLongPoint = CGPoint(x: u, y: v)
                         self.sunsetPointArray.append(latLongPoint)
+                    }
+                    else if angleBetweenSurfaceAndSunlight > 0 && angleBetweenSurfaceAndSunlight > 0.10
+                    {
+                        count += 1
+                        if count > 1
+                        {
+                            let latLongPoint = CGPoint(x: u, y: v)
+                            self.sunsetPointArray.append(latLongPoint)
+                            count = 0
+                        }
                     }
                     v += 1.0
                     
