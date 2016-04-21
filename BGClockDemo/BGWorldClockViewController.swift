@@ -40,6 +40,8 @@ class BGWorldClockViewController: UIViewController,UICollectionViewDataSource,UI
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .Plain, target: nil, action: nil)
         self.settingsButton.setTitleTextAttributes([NSFontAttributeName:UIFont(name: "FontAwesome", size: 22.0)!], forState: .Normal)
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.redrawMap), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let timeZoneManager = appDelegate.timeZoneManager
         if let timeZoneNameArray = NSUserDefaults.standardUserDefaults().objectForKey(timeZoneKey) as? NSArray
@@ -70,10 +72,7 @@ class BGWorldClockViewController: UIViewController,UICollectionViewDataSource,UI
     {
         super.viewWillAppear(animated)
         
-        if self.lastMaskUpdate.timeIntervalSinceDate(NSDate()) < -60 * 10
-        {
-            self.modelSunlightCurve()
-        }
+        self.redrawMap()
         
         self.navigationController?.navigationBar.tintColor = UIColor.blackColor()
         self.navigationController?.navigationBar.shadowImage = nil
@@ -173,8 +172,6 @@ class BGWorldClockViewController: UIViewController,UICollectionViewDataSource,UI
         }
     }
     
-    
-    
     func updateClocks()
     {
         for var timeZone in self.timeZoneArray
@@ -198,7 +195,11 @@ class BGWorldClockViewController: UIViewController,UICollectionViewDataSource,UI
     
     func redrawMap()
     {
-        self.modelSunlightCurve()
+        if self.lastMaskUpdate.timeIntervalSinceDate(NSDate()) < -60 * 10
+        {
+            self.sunsetPointArray = [CGPoint]()
+            self.modelSunlightCurve()
+        }
     }
     
     func createMask()
@@ -239,6 +240,7 @@ class BGWorldClockViewController: UIViewController,UICollectionViewDataSource,UI
             
             let map = BGViewSnapShot.renderImageFromView(self.imageViewHolder)
             self.dayMapImageView.layer.mask = nil
+            self.dayMapImageView.layer.setNeedsDisplay()
             self.dayMapImageView.image = map
             self.lastMaskUpdate = NSDate()
             
@@ -308,6 +310,11 @@ class BGWorldClockViewController: UIViewController,UICollectionViewDataSource,UI
             self.createMask()
             
         })
+    }
+    
+    deinit
+    {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
 }
