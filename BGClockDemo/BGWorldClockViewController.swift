@@ -195,7 +195,8 @@ class BGWorldClockViewController: UIViewController,UICollectionViewDataSource,UI
     
     func redrawMap()
     {
-        if self.lastMaskUpdate.timeIntervalSinceDate(NSDate()) < -60 * 10
+        if self.lastMaskUpdate.timeIntervalSinceDate(NSDate()) < -60 * 10 && self.dayMapImageView.layer.mask != nil
+
         {
             self.sunsetPointArray = [CGPoint]()
             self.modelSunlightCurve()

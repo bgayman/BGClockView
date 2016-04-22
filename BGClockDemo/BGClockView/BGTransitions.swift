@@ -72,14 +72,11 @@ class BGTransitions {
             self.sourceView.superview?.addSubview(self.destinationView)
             self.sourceView.removeFromSuperview()
             self.sourceView.hidden = false
-            break
         case .ShowHide:
             self.destinationView.hidden = false
             self.sourceView.hidden = true
-            break
         case .None:
             self.sourceView.hidden = false
-            break
         }
     }
     
