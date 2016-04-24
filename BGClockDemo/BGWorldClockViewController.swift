@@ -209,7 +209,7 @@ class BGWorldClockViewController: UIViewController,UICollectionViewDataSource,UI
         self.dayMapImageView.image = UIImage(named: "dayMap")
         let maskPath = UIBezierPath()
         let smallRadius:CGFloat = self.dayMapImageView.bounds.size.width * 0.0065
-        let largeRadius:CGFloat = smallRadius * 5.25
+        let largeRadius:CGFloat = smallRadius * 6.50
         
         for index in 0..<self.sunsetPointArray.count
         {
@@ -227,8 +227,8 @@ class BGWorldClockViewController: UIViewController,UICollectionViewDataSource,UI
             let circleRect = CGRect(x: point.x - radius, y: point.y - radius, width: radius * 2.0, height: radius * 2.0)
             let circlePath = UIBezierPath(rect:circleRect)
             maskPath.appendPath(circlePath)
+            self.view.bringSubviewToFront(self.dayMapImageView)
         }
-        maskPath.closePath()
         dispatch_async(dispatch_get_main_queue(), {
             let shapeMask = CAShapeLayer()
             shapeMask.frame = self.dayMapImageView.bounds
@@ -288,7 +288,7 @@ class BGWorldClockViewController: UIViewController,UICollectionViewDataSource,UI
                     
                     let angleBetweenSurfaceAndSunlight = pointingFromEarthToSun.dot(earthNormal)
                     
-                    if angleBetweenSurfaceAndSunlight > 0 && angleBetweenSurfaceAndSunlight < 0.10
+                    if angleBetweenSurfaceAndSunlight > 0 //&& angleBetweenSurfaceAndSunlight < 0.10
                     {
                         let latLongPoint = CGPoint(x: u, y: v)
                         self.sunsetPointArray.append(latLongPoint)

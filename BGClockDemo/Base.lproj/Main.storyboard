@@ -94,7 +94,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dayMap" translatesAutoresizingMaskIntoConstraints="NO" id="don-V0-Cco">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                                        <rect key="frame" x="-1" y="0.0" width="415" height="415"/>
                                     </imageView>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="biX-CQ-3Ye">
                                         <rect key="frame" x="197" y="197" width="20" height="20"/>
@@ -104,9 +104,9 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="pjj-Mm-gug" secondAttribute="trailing" id="8GS-H9-vPs"/>
                                     <constraint firstItem="biX-CQ-3Ye" firstAttribute="centerX" secondItem="gYa-yI-dq8" secondAttribute="centerX" id="BU3-w9-Zz7"/>
-                                    <constraint firstAttribute="bottom" secondItem="don-V0-Cco" secondAttribute="bottom" id="JZk-2g-age"/>
+                                    <constraint firstAttribute="bottom" secondItem="don-V0-Cco" secondAttribute="bottom" constant="-1" id="JZk-2g-age"/>
                                     <constraint firstItem="pjj-Mm-gug" firstAttribute="top" secondItem="gYa-yI-dq8" secondAttribute="top" id="Lci-TI-egB"/>
-                                    <constraint firstItem="don-V0-Cco" firstAttribute="leading" secondItem="gYa-yI-dq8" secondAttribute="leading" id="MaC-7B-geW"/>
+                                    <constraint firstItem="don-V0-Cco" firstAttribute="leading" secondItem="gYa-yI-dq8" secondAttribute="leading" constant="-1" id="MaC-7B-geW"/>
                                     <constraint firstItem="don-V0-Cco" firstAttribute="top" secondItem="gYa-yI-dq8" secondAttribute="top" id="QPt-N0-A74"/>
                                     <constraint firstAttribute="bottom" secondItem="pjj-Mm-gug" secondAttribute="bottom" id="VnU-AO-jZc"/>
                                     <constraint firstAttribute="trailing" secondItem="don-V0-Cco" secondAttribute="trailing" id="g4n-7e-mhC"/>
