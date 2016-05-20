@@ -26,7 +26,7 @@ struct TimeZoneManager
         let coordinatesString = try! String(contentsOfFile: path!)
         let csv = CSwiftV(String: coordinatesString)
         let csvRows = csv.rows
-        for index in 0...NSTimeZone.knownTimeZoneNames().count - 1
+        for index in 0..<csvRows.count
         {
             let timeZoneRow = csvRows[index]
             let timeZoneName:NSString = NSTimeZone.knownTimeZoneNames()[index]
