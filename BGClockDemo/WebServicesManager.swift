@@ -21,7 +21,7 @@ class WebServiceManager: NSObject {
     }
     
     let kYahooStockQuoteURLString = "http://finance.yahoo.com/webservice/v1/symbols/AAPL/quote?format=json"
-    var timer:NSTimer?
+    var timer:Timer?
     
     var tempString:String?
     var weatherIconString:String?
@@ -30,7 +30,7 @@ class WebServiceManager: NSObject {
     
     override init(){
         super.init()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(WebServiceManager.didBecomeActive), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(WebServiceManager.didBecomeActive), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
     }
     
     func didBecomeActive()
@@ -45,29 +45,29 @@ class WebServiceManager: NSObject {
     
     func fetchWeather()
     {
-        let weatherFetchQ = dispatch_queue_create("weather fetcher", nil)
-        dispatch_async(weatherFetchQ, {
-            let weatherData = NSData(contentsOfURL: NSURL(string: self.kWUndergroundConditionURLString)!)
-            let json:[String:AnyObject] = try! NSJSONSerialization.JSONObjectWithData(weatherData!, options: NSJSONReadingOptions.MutableContainers) as! [String : AnyObject]
-            dispatch_async(dispatch_get_main_queue(), {
+        let weatherFetchQ = DispatchQueue(label: "weather fetcher", attributes: [])
+        weatherFetchQ.async(execute: {
+            let weatherData = try? Data(contentsOf: URL(string: self.kWUndergroundConditionURLString)!)
+            let json:[String:AnyObject] = try! JSONSerialization.jsonObject(with: weatherData!, options: JSONSerialization.ReadingOptions.mutableContainers) as! [String : AnyObject]
+            DispatchQueue.main.async(execute: {
                 if let weatherDict:AnyObject = json["current_observation"]{
                     self.tempString = "\(weatherDict["feelslike_f"])℉"
-                    self.weatherIconString = self.weatherIconForWeatherCondition(String(weatherDict["weather"]))
-                    NSNotificationCenter.defaultCenter().postNotificationName(kUpdateWeatherNotification, object: nil)
+                    self.weatherIconString = self.weatherIconForWeatherCondition(String(describing: weatherDict["weather"]))
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: kUpdateWeatherNotification), object: nil)
                 }
                 
             })
         })
     }
     
-    func fetchWeatherAndAstronomyForTimeZoneLocation(timeZoneLocal:TimeZoneLocation,mainThreadCompletionBlock:MainThreadCompletionBlock?)
+    func fetchWeatherAndAstronomyForTimeZoneLocation(_ timeZoneLocal:TimeZoneLocation,mainThreadCompletionBlock:MainThreadCompletionBlock?)
     {
         var timeZoneLocation:TimeZoneLocation = TimeZoneLocation(timeZoneName: timeZoneLocal.timeZoneName, latitude: timeZoneLocal.latitude, longitude: timeZoneLocal.longitude, displayName: timeZoneLocal.displayName)
-        let weatherFetchQ = dispatch_queue_create("weather fetcher", nil)
-        dispatch_async(weatherFetchQ, {
-            let weatherData = NSData(contentsOfURL: NSURL(string: self.kWUndergroundConditionURLString + timeZoneLocation.latitude + "," + timeZoneLocation.longitude + ".json")!)
+        let weatherFetchQ = DispatchQueue(label: "weather fetcher", attributes: [])
+        weatherFetchQ.async(execute: {
+            let weatherData = try? Data(contentsOf: URL(string: self.kWUndergroundConditionURLString + timeZoneLocation.latitude + "," + timeZoneLocation.longitude + ".json")!)
             if weatherData != nil {
-                let json = JSON(data: weatherData!)
+                let json = try! JSON(data: weatherData!)
                 if let sunsetHour = json["sun_phase"]["sunset"]["hour"].string{
                     timeZoneLocation.sunsetHour = Int(sunsetHour)
                 }
@@ -86,14 +86,14 @@ class WebServiceManager: NSObject {
                 if let weatherString = json["current_observation"]["weather"].string{
                     timeZoneLocation.weatherCondition = weatherString
                 }
-                let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-                calendar?.timeZone = NSTimeZone(name: timeZoneLocation.timeZoneName)!
-                let dateComponents = calendar!.components([.Hour,.Minute], fromDate: NSDate())
+                var calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+                calendar.timeZone = TimeZone(identifier: timeZoneLocation.timeZoneName)!
+                let dateComponents = (calendar as NSCalendar).components([.hour,.minute], from: Date())
                 
                 timeZoneLocation.currentHour = dateComponents.hour
                 timeZoneLocation.currentMinute = dateComponents.minute
                 
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     if mainThreadCompletionBlock != nil
                     {
                         mainThreadCompletionBlock!(true,timeZoneLocation)
@@ -101,7 +101,7 @@ class WebServiceManager: NSObject {
                     
                 })
             }else{
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     if mainThreadCompletionBlock != nil
                     {
                         mainThreadCompletionBlock!(false,timeZoneLocation)
@@ -113,71 +113,71 @@ class WebServiceManager: NSObject {
         })
     }
     
-    func weatherIconForWeatherCondition(weatherCondition:String) -> String
+    func weatherIconForWeatherCondition(_ weatherCondition:String) -> String
     {
         if (self.isDay!)
         {
-            if (weatherCondition.rangeOfString("Drizzle") != nil || weatherCondition.rangeOfString("Spray") != nil) {
+            if (weatherCondition.range(of: "Drizzle") != nil || weatherCondition.range(of: "Spray") != nil) {
                 return "";
-            }else if (weatherCondition.rangeOfString("Rain") != nil)
+            }else if (weatherCondition.range(of: "Rain") != nil)
             {
                 return "";
-            }else if(weatherCondition.rangeOfString("Snow") != nil){
+            }else if(weatherCondition.range(of: "Snow") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Ice") != nil || weatherCondition.rangeOfString("Hail") != nil){
+            }else if(weatherCondition.range(of: "Ice") != nil || weatherCondition.range(of: "Hail") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Clear") != nil){
+            }else if(weatherCondition.range(of: "Clear") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Partly Cloudy") != nil || weatherCondition.rangeOfString("Scattered Clouds") != nil){
+            }else if(weatherCondition.range(of: "Partly Cloudy") != nil || weatherCondition.range(of: "Scattered Clouds") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Overcast") != nil){
+            }else if(weatherCondition.range(of: "Overcast") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Mist") != nil || weatherCondition.rangeOfString("Fog") != nil){
+            }else if(weatherCondition.range(of: "Mist") != nil || weatherCondition.range(of: "Fog") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Haze") != nil){
+            }else if (weatherCondition.range(of: "Haze") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Sand") != nil){
+            }else if (weatherCondition.range(of: "Sand") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Rain Showers") != nil){
+            }else if (weatherCondition.range(of: "Rain Showers") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Thunderstorm") != nil){
+            }else if (weatherCondition.range(of: "Thunderstorm") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Mostly Cloudy") != nil){
+            }else if (weatherCondition.range(of: "Mostly Cloudy") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Funnel Cloud") != nil){
+            }else if (weatherCondition.range(of: "Funnel Cloud") != nil){
                 return "";
             }
         }else{
-            if (weatherCondition.rangeOfString("Drizzle") != nil || weatherCondition.rangeOfString("Spray") != nil) {
+            if (weatherCondition.range(of: "Drizzle") != nil || weatherCondition.range(of: "Spray") != nil) {
                 return "";
-            }else if (weatherCondition.rangeOfString("Rain") != nil)
+            }else if (weatherCondition.range(of: "Rain") != nil)
             {
                 return "";
-            }else if(weatherCondition.rangeOfString("Snow") != nil){
+            }else if(weatherCondition.range(of: "Snow") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Ice") != nil || weatherCondition.rangeOfString("Hail") != nil){
+            }else if(weatherCondition.range(of: "Ice") != nil || weatherCondition.range(of: "Hail") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Clear") != nil){
+            }else if(weatherCondition.range(of: "Clear") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Snow") != nil){
+            }else if(weatherCondition.range(of: "Snow") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Partly Cloudy") != nil || weatherCondition.rangeOfString("Scattered Clouds") != nil){
+            }else if(weatherCondition.range(of: "Partly Cloudy") != nil || weatherCondition.range(of: "Scattered Clouds") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Overcast") != nil){
+            }else if(weatherCondition.range(of: "Overcast") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Mist") != nil || weatherCondition.rangeOfString("Fog") != nil){
+            }else if(weatherCondition.range(of: "Mist") != nil || weatherCondition.range(of: "Fog") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Haze") != nil){
+            }else if (weatherCondition.range(of: "Haze") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Sand") != nil){
+            }else if (weatherCondition.range(of: "Sand") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Rain Showers") != nil){
+            }else if (weatherCondition.range(of: "Rain Showers") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Thunderstorm") != nil){
+            }else if (weatherCondition.range(of: "Thunderstorm") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Mostly Cloudy") != nil){
+            }else if (weatherCondition.range(of: "Mostly Cloudy") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Funnel Cloud") != nil){
+            }else if (weatherCondition.range(of: "Funnel Cloud") != nil){
                 return "";
             }
         }
@@ -185,7 +185,7 @@ class WebServiceManager: NSObject {
     }
     
     deinit{
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 }
 

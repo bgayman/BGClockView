@@ -22,18 +22,18 @@ struct TimeZoneManager
     mutating func getAllTimeZones() -> [TimeZoneLocation]
     {
         var timeZones = [TimeZoneLocation]()
-        let path = NSBundle.mainBundle().pathForResource("Coordinates", ofType: "txt")//or rtf for an rtf file
+        let path = Bundle.main.path(forResource: "Coordinates", ofType: "txt")//or rtf for an rtf file
         let coordinatesString = try! String(contentsOfFile: path!)
         let csv = CSwiftV(String: coordinatesString)
         let csvRows = csv.rows
         for index in 0..<csvRows.count
         {
             let timeZoneRow = csvRows[index]
-            let timeZoneName:NSString = NSTimeZone.knownTimeZoneNames()[index]
+            let timeZoneName:NSString = TimeZone.knownTimeZoneIdentifiers[index] as NSString
             if timeZoneRow.count == 3
             {
                 var displayName = timeZoneRow[0] as NSString
-                displayName = displayName.stringByReplacingOccurrencesOfString(",", withString: "")
+                displayName = displayName.replacingOccurrences(of: ",", with: "") as NSString
                 let timeZoneLocation = TimeZoneLocation(timeZoneName:timeZoneName as String,latitude:timeZoneRow[1],longitude:timeZoneRow[2],displayName:displayName as String)
                 timeZones.append(timeZoneLocation)
                 
@@ -56,9 +56,9 @@ struct TimeZoneManager
         return timeZones
     }
     
-    func timeZoneLocationForTimeZoneName(timeZoneName:String) -> TimeZoneLocation?
+    func timeZoneLocationForTimeZoneName(_ timeZoneName:String) -> TimeZoneLocation?
     {
-        if let i = self.allTimeZones.indexOf({$0.timeZoneName == timeZoneName}) {
+        if let i = self.allTimeZones.index(where: {$0.timeZoneName == timeZoneName}) {
             return self.allTimeZones[i]
         }
         return nil

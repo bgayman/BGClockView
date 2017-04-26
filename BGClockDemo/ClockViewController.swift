@@ -31,13 +31,13 @@ class ClockViewController: UIViewController {
         self.clockView.start()
     }
 
-    override func viewWillAppear(animated: Bool)
+    override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
         
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.tintColor = UIColor.blackColor()
+        self.navigationController?.navigationBar.tintColor = UIColor.black
         
         self.title = self.timeZoneLocation?.displayName
         self.clockView.timeZoneNameString = self.timeZoneLocation?.timeZoneName
@@ -52,39 +52,39 @@ class ClockViewController: UIViewController {
 
         if self.timeZoneLocation != nil && self.timeZoneLocation!.isDay
         {
-            self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
-            self.tabBarController?.tabBar.tintColor = UIColor.blackColor()
-            self.view.backgroundColor = UIColor.whiteColor()
-            self.sunsetLabel.textColor = UIColor.blackColor()
-            self.sunsetIcon.textColor = UIColor.blackColor()
-            self.weatherLabel.textColor = UIColor.blackColor()
-            self.weatherIconLabel.textColor = UIColor.blackColor()
+            self.tabBarController?.tabBar.barTintColor = UIColor.white
+            self.tabBarController?.tabBar.tintColor = UIColor.black
+            self.view.backgroundColor = UIColor.white
+            self.sunsetLabel.textColor = UIColor.black
+            self.sunsetIcon.textColor = UIColor.black
+            self.weatherLabel.textColor = UIColor.black
+            self.weatherIconLabel.textColor = UIColor.black
             if self.timeZoneLocation!.sunsetMinute != nil {
                 let sunsetMinuteString = self.timeZoneLocation!.sunsetMinute! < 10 ? "0" + String(self.timeZoneLocation!.sunsetMinute!) : String(self.timeZoneLocation!.sunsetMinute!)
                 self.sunsetLabel.text = String(self.timeZoneLocation!.sunsetHour!) + ":" + sunsetMinuteString
                 self.sunsetIcon.text = ""
             }
-            self.navigationController?.navigationBar.tintColor = UIColor.blackColor()
-            UIApplication.sharedApplication().statusBarStyle = .Default
-            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.blackColor()]
+            self.navigationController?.navigationBar.tintColor = UIColor.black
+            UIApplication.shared.statusBarStyle = .default
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
         }
         else
         {
-            self.tabBarController?.tabBar.barTintColor = UIColor.blackColor()
-            self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
-            self.view.backgroundColor = UIColor.blackColor()
-            self.sunsetLabel.textColor = UIColor.whiteColor()
-            self.sunsetIcon.textColor = UIColor.whiteColor()
-            self.weatherLabel.textColor = UIColor.whiteColor()
-            self.weatherIconLabel.textColor = UIColor.whiteColor()
+            self.tabBarController?.tabBar.barTintColor = UIColor.black
+            self.tabBarController?.tabBar.tintColor = UIColor.white
+            self.view.backgroundColor = UIColor.black
+            self.sunsetLabel.textColor = UIColor.white
+            self.sunsetIcon.textColor = UIColor.white
+            self.weatherLabel.textColor = UIColor.white
+            self.weatherIconLabel.textColor = UIColor.white
             if self.timeZoneLocation!.sunsetMinute != nil {
                 let sunriseMinuteString = self.timeZoneLocation!.sunriseMinute! < 10 ? "0" + String(self.timeZoneLocation!.sunriseMinute!) : String(self.timeZoneLocation!.sunriseMinute!)
                 self.sunsetLabel.text = String(self.timeZoneLocation!.sunriseHour!) + ":" + sunriseMinuteString
                 self.sunsetIcon.text = ""
             }
-            self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-            UIApplication.sharedApplication().statusBarStyle = .LightContent
-            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+            self.navigationController?.navigationBar.tintColor = UIColor.white
+            UIApplication.shared.statusBarStyle = .lightContent
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         }
     }
 
@@ -95,10 +95,10 @@ class ClockViewController: UIViewController {
     
     
 
-    func setupClockForDay(clockView:BGClockView)
+    func setupClockForDay(_ clockView:BGClockView)
     {
-        let faceStyle = NSUserDefaults.standardUserDefaults().objectForKey("faceStyle") as? String
-        let handStyle = NSUserDefaults.standardUserDefaults().objectForKey("handStyle") as? String
+        let faceStyle = UserDefaults.standard.object(forKey: "faceStyle") as? String
+        let handStyle = UserDefaults.standard.object(forKey: "handStyle") as? String
         
         if faceStyle != nil && faceStyle != "Image"
         {
@@ -119,25 +119,25 @@ class ClockViewController: UIViewController {
             clockView.secondHandImage = UIImage(named: "secondHand")
         }
         
-        clockView.backgroundColor = UIColor.whiteColor()
-        clockView.minuteTickColor = UIColor.blackColor()
-        clockView.secondTickColor = UIColor.blackColor()
-        clockView.minuteHandColor = UIColor.blackColor()
-        clockView.textColor = UIColor.blackColor()
-        clockView.hourHandColor = UIColor.blackColor()
-        clockView.secondHandColor = UIColor.redColor()
+        clockView.backgroundColor = UIColor.white
+        clockView.minuteTickColor = UIColor.black
+        clockView.secondTickColor = UIColor.black
+        clockView.minuteHandColor = UIColor.black
+        clockView.textColor = UIColor.black
+        clockView.hourHandColor = UIColor.black
+        clockView.secondHandColor = UIColor.red
         clockView.hideDateLabel = true
         clockView.hasDropShadow = true
-        if clockView.face == .Flip
+        if clockView.face == .flip
         {
-            clockView.textColor = UIColor.whiteColor()
+            clockView.textColor = UIColor.white
         }
     }
     
-    func setupClockForNight(clockView:BGClockView)
+    func setupClockForNight(_ clockView:BGClockView)
     {
-        let faceStyle = NSUserDefaults.standardUserDefaults().objectForKey("faceStyle") as? String
-        let handStyle = NSUserDefaults.standardUserDefaults().objectForKey("handStyle") as? String
+        let faceStyle = UserDefaults.standard.object(forKey: "faceStyle") as? String
+        let handStyle = UserDefaults.standard.object(forKey: "handStyle") as? String
         
         if faceStyle != nil && faceStyle != "Image"
         {
@@ -158,19 +158,19 @@ class ClockViewController: UIViewController {
             clockView.secondHandImage = UIImage(named: "secondHand")
         }
         
-        clockView.backgroundColor = UIColor.blackColor()
-        clockView.minuteTickColor = UIColor.whiteColor()
-        clockView.secondTickColor = UIColor.whiteColor()
-        clockView.minuteHandColor = UIColor.whiteColor()
-        clockView.screwColor = UIColor.blackColor()
-        clockView.textColor = UIColor.whiteColor()
-        clockView.hourHandColor = UIColor.whiteColor()
+        clockView.backgroundColor = UIColor.black
+        clockView.minuteTickColor = UIColor.white
+        clockView.secondTickColor = UIColor.white
+        clockView.minuteHandColor = UIColor.white
+        clockView.screwColor = UIColor.black
+        clockView.textColor = UIColor.white
+        clockView.hourHandColor = UIColor.white
         clockView.secondHandColor = UIColor(red: 134.0/255.0, green: 96.0/255.0, blue: 245.0/255.0, alpha: 1.0)
         clockView.hideDateLabel = true
         clockView.hasDropShadow = true
-        if clockView.face == .Flip
+        if clockView.face == .flip
         {
-            clockView.textColor = UIColor.blackColor()
+            clockView.textColor = UIColor.black
         }
     }
 

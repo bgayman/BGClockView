@@ -9,86 +9,86 @@
 import UIKit
 
 extension BGClockView {
-    class func clockFaceStyleForString(clockFaceString:String) -> FaceStyle
+    class func clockFaceStyleForString(_ clockFaceString:String) -> FaceStyle
     {
         switch clockFaceString {
         case ".Swiss":
-            return .Swiss
+            return .swiss
         case ".Normal":
-            return .Normal
+            return .normal
         case ".Simple"    :
-            return .Simple
+            return .simple
         case ".Minimal"    :
-            return .Minimal
+            return .minimal
         case ".Utility"    :
-            return .Utility
+            return .utility
         case ".BigBen"    :
-            return .BigBen
+            return .bigBen
         case ".Melting"    :
-            return .Melting
+            return .melting
         case ".Plain"    :
-            return .Plain
+            return .plain
         case ".Square"    :
-            return .Square
+            return .square
         case ".Chrono"    :
-            return .Chrono
+            return .chrono
         case ".Flip"    :
-            return .Flip
+            return .flip
         case ".Zulu"    :
-            return .Zulu
+            return .zulu
         default:
-            return .Swiss
+            return .swiss
         }
     }
     
-    class func clockHandStyleForString(clockHandString:String) -> HandStyle
+    class func clockHandStyleForString(_ clockHandString:String) -> HandStyle
     {
         switch clockHandString{
         case ".Swiss":
-            return .Swiss
+            return .swiss
         case ".AppleWatch":
-            return .AppleWatch
+            return .appleWatch
         case ".Chrono":
-            return .Chrono
+            return .chrono
         case ".BigBen":
-            return .BigBen
+            return .bigBen
         case ".Melting":
-            return .Melting
+            return .melting
         case ".Minimal":
-            return .Minimal
+            return .minimal
         case ".Plain":
-            return .Plain
+            return .plain
         default:
-            return .Swiss
+            return .swiss
         }
     }
     
-    class func clockFaceStringForFaceStyle(clockFaceStyle:FaceStyle) -> String
+    class func clockFaceStringForFaceStyle(_ clockFaceStyle:FaceStyle) -> String
     {
         switch clockFaceStyle {
-        case .Swiss:
+        case .swiss:
             return ".Swiss"
-        case .Normal:
+        case .normal:
             return ".Normal"
-        case .Simple    :
+        case .simple    :
             return ".Simple"
-        case .Minimal    :
+        case .minimal    :
             return ".Minimal"
-        case .Utility    :
+        case .utility    :
             return ".Utility"
-        case .BigBen    :
+        case .bigBen    :
             return ".BigBen"
-        case .Melting    :
+        case .melting    :
             return ".Melting"
-        case .Plain    :
+        case .plain    :
             return ".Plain"
-        case .Square    :
+        case .square    :
             return ".Square"
-        case .Chrono    :
+        case .chrono    :
             return ".Chrono"
-        case .Flip    :
+        case .flip    :
             return ".Flip"
-        case .Zulu    :
+        case .zulu    :
             return ".Zulu"
         }
     }
@@ -116,18 +116,18 @@ class ClockCollectionViewCell: UICollectionViewCell {
         didSet{
             if self.isDay == true
             {
-                self.dayClockView.hidden = false
+                self.dayClockView.isHidden = false
                 self.dayClockView.start()
                 
-                self.nightClockView.hidden = true
+                self.nightClockView.isHidden = true
                 self.nightClockView.stop()
             }
             else
             {
-                self.dayClockView.hidden = true
+                self.dayClockView.isHidden = true
                 self.dayClockView.stop()
                 
-                self.nightClockView.hidden = false
+                self.nightClockView.isHidden = false
                 self.nightClockView.start()
             }
         }
@@ -135,7 +135,7 @@ class ClockCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib()
     {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ClockCollectionViewCell.updateClock), name: NSUserDefaultsDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ClockCollectionViewCell.updateClock), name: UserDefaults.didChangeNotification, object: nil)
         self.setupClockForDay(self.dayClockView)
         self.setupClockForNight(self.nightClockView)
     }
@@ -143,27 +143,17 @@ class ClockCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews()
     {
         super.layoutSubviews()
-        
-        if !self.square
-        {
-            self.dayClockView.layer.cornerRadius = self.dayClockView.bounds.width/2
-            self.dayClockView.layer.masksToBounds = true
-            self.nightClockView.layer.cornerRadius = self.nightClockView.bounds.width/2
-            self.nightClockView.layer.masksToBounds = true
-        }
-        else
-        {
-            self.dayClockView.layer.cornerRadius = 3.0
-            self.dayClockView.layer.masksToBounds = true
-            self.nightClockView.layer.cornerRadius = 3.0
-            self.nightClockView.layer.masksToBounds = true
-        }
+    
+        self.dayClockView.layer.cornerRadius = 3.0
+        self.dayClockView.layer.masksToBounds = true
+        self.nightClockView.layer.cornerRadius = 3.0
+        self.nightClockView.layer.masksToBounds = true
     }
     
-    func setupClockForDay(clockView:BGClockView)
+    func setupClockForDay(_ clockView:BGClockView)
     {
-        let faceStyle = NSUserDefaults.standardUserDefaults().objectForKey("faceStyle") as? String
-        let handStyle = NSUserDefaults.standardUserDefaults().objectForKey("handStyle") as? String
+        let faceStyle = UserDefaults.standard.object(forKey: "faceStyle") as? String
+        let handStyle = UserDefaults.standard.object(forKey: "handStyle") as? String
         
         if faceStyle != nil && faceStyle != "Image"
         {
@@ -184,25 +174,25 @@ class ClockCollectionViewCell: UICollectionViewCell {
             clockView.secondHandImage = UIImage(named: "secondHand")
         }
         
-        clockView.backgroundColor = UIColor.whiteColor()
-        clockView.minuteTickColor = UIColor.blackColor()
-        clockView.secondTickColor = UIColor.blackColor()
-        clockView.minuteHandColor = UIColor.blackColor()
-        clockView.textColor = UIColor.blackColor()
-        clockView.hourHandColor = UIColor.blackColor()
-        clockView.secondHandColor = UIColor.redColor()
+        clockView.backgroundColor = UIColor.white
+        clockView.minuteTickColor = UIColor.black
+        clockView.secondTickColor = UIColor.black
+        clockView.minuteHandColor = UIColor.black
+        clockView.textColor = UIColor.black
+        clockView.hourHandColor = UIColor.black
+        clockView.secondHandColor = UIColor.red
         clockView.hideDateLabel = true
         clockView.hasDropShadow = true
-        if clockView.face == .Flip
+        if clockView.face == .flip
         {
-            clockView.textColor = UIColor.whiteColor()
+            clockView.textColor = UIColor.white
         }
     }
     
-    func setupClockForNight(clockView:BGClockView)
+    func setupClockForNight(_ clockView:BGClockView)
     {
-        let faceStyle = NSUserDefaults.standardUserDefaults().objectForKey("faceStyle") as? String
-        let handStyle = NSUserDefaults.standardUserDefaults().objectForKey("handStyle") as? String
+        let faceStyle = UserDefaults.standard.object(forKey: "faceStyle") as? String
+        let handStyle = UserDefaults.standard.object(forKey: "handStyle") as? String
         
         if faceStyle != nil && faceStyle != "Image"
         {
@@ -223,19 +213,19 @@ class ClockCollectionViewCell: UICollectionViewCell {
             clockView.secondHandImage = UIImage(named: "secondHand")
         }
         
-        clockView.backgroundColor = UIColor.blackColor()
-        clockView.minuteTickColor = UIColor.whiteColor()
-        clockView.secondTickColor = UIColor.whiteColor()
-        clockView.minuteHandColor = UIColor.whiteColor()
-        clockView.screwColor = UIColor.blackColor()
-        clockView.textColor = UIColor.whiteColor()
-        clockView.hourHandColor = UIColor.whiteColor()
+        clockView.backgroundColor = UIColor.black
+        clockView.minuteTickColor = UIColor.white
+        clockView.secondTickColor = UIColor.white
+        clockView.minuteHandColor = UIColor.white
+        clockView.screwColor = UIColor.black
+        clockView.textColor = UIColor.white
+        clockView.hourHandColor = UIColor.white
         clockView.secondHandColor = UIColor(red: 134.0/255.0, green: 96.0/255.0, blue: 245.0/255.0, alpha: 1.0)
         clockView.hideDateLabel = true
         clockView.hasDropShadow = true
-        if clockView.face == .Flip
+        if clockView.face == .flip
         {
-            clockView.textColor = UIColor.blackColor()
+            clockView.textColor = UIColor.black
         }
     }
     
@@ -247,6 +237,6 @@ class ClockCollectionViewCell: UICollectionViewCell {
     
     deinit
     {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 }

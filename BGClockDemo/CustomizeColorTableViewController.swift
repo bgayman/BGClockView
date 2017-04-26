@@ -28,43 +28,43 @@ class CustomizeColorTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return BGClockView.colorDictionary().keys.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-        let color = NSUserDefaults.standardUserDefaults().objectForKey(userDefaultColorKey!) as? String
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let color = UserDefaults.standard.object(forKey: userDefaultColorKey!) as? String
         
         let colorStrings:[String] = [String](BGClockView.colorDictionary().keys)
         let title = colorStrings[indexPath.row]
-        cell.textLabel?.text = title.capitalizedString
+        cell.textLabel?.text = title.capitalized
         
         if title == color || (color == nil && title == "black" && self.navigationItem.title != "Second Hand Color") || (color == nil && title == "red" && self.navigationItem.title == "Second Hand Color")
         {
-            cell.accessoryType = .Checkmark
+            cell.accessoryType = .checkmark
         }
         else
         {
-            cell.accessoryType = .None
+            cell.accessoryType = .none
         }
 
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let colorStrings:[String] = [String](BGClockView.colorDictionary().keys)
         let color = colorStrings[indexPath.row]
-        NSUserDefaults.standardUserDefaults().setObject(color, forKey: userDefaultColorKey!)
-        NSUserDefaults.standardUserDefaults().synchronize()
-        self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: .None)
+        UserDefaults.standard.set(color, forKey: userDefaultColorKey!)
+        UserDefaults.standard.synchronize()
+        self.tableView.reloadSections(IndexSet(integer: indexPath.section), with: .none)
     }
 
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return "Colors"
     }
 

@@ -98,10 +98,10 @@ struct Quaternion {
 
 extension Scalar {
     
-    static let Pi = Scalar(M_PI)
-    static let HalfPi = Scalar(M_PI_2)
-    static let QuarterPi = Scalar(M_PI_4)
-    static let TwoPi = Scalar(M_PI * 2)
+    static let Pi = Scalar(Double.pi)
+    static let HalfPi = Scalar(Double.pi / 2.0)
+    static let QuarterPi = Scalar(Double.pi / 4.0)
+    static let TwoPi = Scalar(Double.pi * 2)
     static let DegreesPerRadian = 180 / Pi
     static let RadiansPerDegree = Pi / 180
     static let Epsilon: Scalar = 0.0001
@@ -151,11 +151,11 @@ extension Vector2: Equatable, Hashable {
         return [x, y]
     }
     
-    func dot(v: Vector2) -> Scalar {
+    func dot(_ v: Vector2) -> Scalar {
         return x * v.x + y * v.y
     }
     
-    func cross(v: Vector2) -> Scalar {
+    func cross(_ v: Vector2) -> Scalar {
         return x * v.y - y * v.x
     }
     
@@ -168,18 +168,18 @@ extension Vector2: Equatable, Hashable {
         return self / sqrt(lengthSquared)
     }
     
-    func rotatedBy(radians: Scalar) -> Vector2 {
+    func rotatedBy(_ radians: Scalar) -> Vector2 {
         
         let cs = cos(radians)
         let sn = sin(radians)
         return Vector2(x * cs - y * sn, x * sn + y * cs)
     }
     
-    func rotatedBy(radians: Scalar, around pivot: Vector2) -> Vector2 {
+    func rotatedBy(_ radians: Scalar, around pivot: Vector2) -> Vector2 {
         return (self - pivot).rotatedBy(radians) + pivot
     }
     
-    func angleWith(v: Vector2) -> Scalar {
+    func angleWith(_ v: Vector2) -> Scalar {
         
         if self == v {
             return 0
@@ -193,7 +193,7 @@ extension Vector2: Equatable, Hashable {
         return atan2(cross, dot)
     }
     
-    func interpolatedWith(v: Vector2, t: Scalar) -> Vector2 {
+    func interpolatedWith(_ v: Vector2, t: Scalar) -> Vector2 {
         return self + (v - self) * t
     }
 }
@@ -314,11 +314,11 @@ extension Vector3: Equatable, Hashable {
         return [x, y, z]
     }
     
-    func dot(v: Vector3) -> Scalar {
+    func dot(_ v: Vector3) -> Scalar {
         return x * v.x + y * v.y + z * v.z
     }
     
-    func cross(v: Vector3) -> Vector3 {
+    func cross(_ v: Vector3) -> Vector3 {
         return Vector3(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x)
     }
     
@@ -331,7 +331,7 @@ extension Vector3: Equatable, Hashable {
         return self / sqrt(lengthSquared)
     }
 
-    func interpolatedWith(v: Vector3, t: Scalar) -> Vector3 {
+    func interpolatedWith(_ v: Vector3, t: Scalar) -> Vector3 {
         return self + (v - self) * t
     }
 }
@@ -483,7 +483,7 @@ extension Vector4: Equatable, Hashable {
         return [x, y, z, w]
     }
     
-    func dot(v: Vector4) -> Scalar {
+    func dot(_ v: Vector4) -> Scalar {
         return x * v.x + y * v.y + z * v.z + w * v.w
     }
     
@@ -496,7 +496,7 @@ extension Vector4: Equatable, Hashable {
         return self / sqrt(lengthSquared)
     }
     
-    func interpolatedWith(v: Vector4, t: Scalar) -> Vector4 {
+    func interpolatedWith(_ v: Vector4, t: Scalar) -> Vector4 {
         return self + (v - self) * t
     }
 }
@@ -644,7 +644,7 @@ extension Matrix3: Equatable, Hashable {
         return adjugate * (1 / determinant)
     }
 
-    func interpolatedWith(m: Matrix3, t: Scalar) -> Matrix3 {
+    func interpolatedWith(_ m: Matrix3, t: Scalar) -> Matrix3 {
         
         return Matrix3(
             m11 + (m.m11 - m11) * t,
@@ -934,7 +934,7 @@ extension Matrix4: Equatable, Hashable {
         return m
     }
     
-    private func determinantForAdjugate(m: Matrix4) -> Scalar {
+    fileprivate func determinantForAdjugate(_ m: Matrix4) -> Scalar {
         return m11 * m.m11 + m12 * m.m21 + m13 * m.m31 + m14 * m.m41
     }
     
@@ -1227,7 +1227,7 @@ extension Quaternion: Equatable, Hashable {
         return [x, y, z, w]
     }
     
-    func dot(v: Quaternion) -> Scalar {
+    func dot(_ v: Quaternion) -> Scalar {
         return x * v.x + y * v.y + z * v.z + w * v.w
     }
     
@@ -1240,7 +1240,7 @@ extension Quaternion: Equatable, Hashable {
         return self / sqrt(lengthSquared)
     }
     
-    func interpolatedWith(q: Quaternion, t: Scalar) -> Quaternion {
+    func interpolatedWith(_ q: Quaternion, t: Scalar) -> Quaternion {
         
         let dot = max(-1, min(1, self.dot(q)))
         if dot ~= 1 {

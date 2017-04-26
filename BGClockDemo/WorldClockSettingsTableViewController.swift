@@ -15,40 +15,40 @@ class WorldClockSettingsTableViewController: UITableViewController {
         super.viewDidLoad()
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let cell = self.tableView.cellForRowAtIndexPath(indexPath)
+        let cell = self.tableView.cellForRow(at: indexPath)
         let title = cell?.textLabel?.text
         if indexPath.section == 0
         {
-            NSUserDefaults.standardUserDefaults().setObject(title, forKey: "faceStyle")
+            UserDefaults.standard.set(title, forKey: "faceStyle")
         }
         else if indexPath.section == 1
         {
-            NSUserDefaults.standardUserDefaults().setObject(title, forKey: "handStyle")
+            UserDefaults.standard.set(title, forKey: "handStyle")
         }
-        NSUserDefaults.standardUserDefaults().synchronize()
-        self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: .None)
+        UserDefaults.standard.synchronize()
+        self.tableView.reloadSections(IndexSet(integer: indexPath.section), with: .none)
     }
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        let faceStyle = NSUserDefaults.standardUserDefaults().objectForKey("faceStyle") as? String
-        let handStyle = NSUserDefaults.standardUserDefaults().objectForKey("handStyle") as? String
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let faceStyle = UserDefaults.standard.object(forKey: "faceStyle") as? String
+        let handStyle = UserDefaults.standard.object(forKey: "handStyle") as? String
         
         if indexPath.section == 0
         {
             let title = cell.textLabel!.text
             if title != nil && title == faceStyle
             {
-                cell.accessoryType = .Checkmark
+                cell.accessoryType = .checkmark
             }
             else if faceStyle == nil && title == ".Swiss"
             {
-                cell.accessoryType = .Checkmark
+                cell.accessoryType = .checkmark
             }
             else
             {
-                cell.accessoryType = .None
+                cell.accessoryType = .none
             }
         }
         else if indexPath.section == 1
@@ -56,23 +56,23 @@ class WorldClockSettingsTableViewController: UITableViewController {
             let title = cell.textLabel!.text
             if title != nil && title == handStyle
             {
-                cell.accessoryType = .Checkmark
+                cell.accessoryType = .checkmark
             }
             else if handStyle == nil && title == ".Swiss"
             {
-                cell.accessoryType = .Checkmark
+                cell.accessoryType = .checkmark
             }
             else
             {
-                cell.accessoryType = .None
+                cell.accessoryType = .none
             }
         }
     }
 
    
-    @IBAction func done(sender: UIBarButtonItem)
+    @IBAction func done(_ sender: UIBarButtonItem)
     {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
 }

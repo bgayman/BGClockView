@@ -11,15 +11,15 @@ import UIKit
 
 enum BGTransitionAction
 {
-    case AddRemove
-    case ShowHide
-    case None
+    case addRemove
+    case showHide
+    case none
 }
 
 class BGTransitions {
     var sourceView:UIView
     var destinationView:UIView
-    var duration:NSTimeInterval
+    var duration:TimeInterval
     var completionAction:BGTransitionAction
     var dismissing:Bool
     var rect:CGRect
@@ -27,7 +27,7 @@ class BGTransitions {
     var m34:Float
     var presentedControllerIncludesStatusBarInFrame:Bool
     
-    init(sourceView:UIView,destinationView:UIView,duration:NSTimeInterval,timingCurve:UIViewAnimationCurve,completionAction:BGTransitionAction)
+    init(sourceView:UIView,destinationView:UIView,duration:TimeInterval,timingCurve:UIViewAnimationCurve,completionAction:BGTransitionAction)
     {
         self.sourceView = sourceView
         self.destinationView = destinationView
@@ -43,13 +43,13 @@ class BGTransitions {
     func timingCurveFunctionName() -> String
     {
         switch self.timingCurve {
-        case .EaseOut:
+        case .easeOut:
             return kCAMediaTimingFunctionEaseOut
-        case .EaseIn:
+        case .easeIn:
             return kCAMediaTimingFunctionEaseIn
-        case .EaseInOut:
+        case .easeInOut:
             return kCAMediaTimingFunctionEaseInEaseOut
-        case .Linear:
+        case .linear:
             return kCAMediaTimingFunctionLinear
         }
     }
@@ -59,45 +59,45 @@ class BGTransitions {
         self.perform(nil)
     }
     
-    func perform(completion:CompletionBlock?)
+    func perform(_ completion:CompletionBlock?)
     {
-        NSException.raise("Incomplete Implementation", format: "BGTransition must be subclassed and the perform method implemented.",arguments: CVaListPointer(_fromUnsafeMutablePointer: nil))
+        fatalError("should be implemented by subclasss")
     }
     
     func transitionDidComplete()
     {
         switch self.completionAction
         {
-        case .AddRemove:
+        case .addRemove:
             self.sourceView.superview?.addSubview(self.destinationView)
             self.sourceView.removeFromSuperview()
-            self.sourceView.hidden = false
-        case .ShowHide:
-            self.destinationView.hidden = false
-            self.sourceView.hidden = true
-        case .None:
-            self.sourceView.hidden = false
+            self.sourceView.isHidden = false
+        case .showHide:
+            self.destinationView.isHidden = false
+            self.sourceView.isHidden = true
+        case .none:
+            self.sourceView.isHidden = false
         }
     }
     
-    func setPresentingController(presentingController:UIViewController)
+    func setPresentingController(_ presentingController:UIViewController)
     {
         var src = presentingController
         
         while true
         {
-            if src.parentViewController == nil
+            if src.parent == nil
             {
                 break
             }
             
-            src = src.parentViewController!
+            src = src.parent!
         }
         
         self.rect = src.view.bounds
     }
     
-    func setPresentedController(presentedController:UIViewController)
+    func setPresentedController(_ presentedController:UIViewController)
     {
         self.presentedControllerIncludesStatusBarInFrame = presentedController is UINavigationController
     }
@@ -107,9 +107,9 @@ class BGTransitions {
         var bounds = self.rect
         if self.dismissing && self.presentedControllerIncludesStatusBarInFrame
         {
-            let statusBarFrame = UIApplication.sharedApplication().statusBarFrame
-            let statusBarWindowRect = self.destinationView.window?.convertRect(statusBarFrame, fromWindow: nil)
-            let statusBarViewRect = self.destinationView.convertRect(statusBarWindowRect!, fromView: nil)
+            let statusBarFrame = UIApplication.shared.statusBarFrame
+            let statusBarWindowRect = self.destinationView.window?.convert(statusBarFrame, from: nil)
+            let statusBarViewRect = self.destinationView.convert(statusBarWindowRect!, from: nil)
             bounds.origin.y += statusBarViewRect.size.height
             bounds.size.height -= statusBarViewRect.size.height
             self.rect = bounds
@@ -119,7 +119,7 @@ class BGTransitions {
     }
     
 //MARK - Class methods
-    class func defaultDuration() -> NSTimeInterval
+    class func defaultDuration() -> TimeInterval
     {
         return 0.3
     }

@@ -10,6 +10,7 @@
 		CD3A92F51CB9898C00465506 /* BGClockCustomizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3A92F41CB9898C00465506 /* BGClockCustomizationViewController.swift */; };
 		CD3A92F71CB98D3A00465506 /* CustomizeClockSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3A92F61CB98D3A00465506 /* CustomizeClockSettingsTableViewController.swift */; };
 		CD3A933E1CBA9DB900465506 /* CustomizeColorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3A933D1CBA9DB900465506 /* CustomizeColorTableViewController.swift */; };
+		CD47E7D11EB01E42004289EC /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD47E7D01EB01E42004289EC /* SwiftyJSON.swift */; };
 		CD7A14871C95AD9C00D8E06F /* ClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7A14861C95AD9C00D8E06F /* ClockViewController.swift */; };
 		CD7DBD311C93D3D000ED9F20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD301C93D3D000ED9F20 /* AppDelegate.swift */; };
 		CD7DBD381C93D3D000ED9F20 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD7DBD361C93D3D000ED9F20 /* Main.storyboard */; };
@@ -22,7 +23,6 @@
 		CD7DBD651C93D43A00ED9F20 /* TimeZoneLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD641C93D43A00ED9F20 /* TimeZoneLocation.swift */; };
 		CD7DBD701C93D48000ED9F20 /* Coordinates.txt in Resources */ = {isa = PBXBuildFile; fileRef = CD7DBD6E1C93D48000ED9F20 /* Coordinates.txt */; };
 		CD7DBD711C93D48000ED9F20 /* CSwiftV.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD6F1C93D48000ED9F20 /* CSwiftV.swift */; };
-		CD7DBD731C93D49000ED9F20 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD721C93D49000ED9F20 /* SwiftyJSON.swift */; };
 		CD7DBD751C93D4A400ED9F20 /* CityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD741C93D4A400ED9F20 /* CityTableViewController.swift */; };
 		CD7DBD7D1C93D4CF00ED9F20 /* VectorMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD781C93D4CF00ED9F20 /* VectorMath.swift */; };
 		CD7DBD811C93D51500ED9F20 /* BGWorldClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7DBD801C93D51500ED9F20 /* BGWorldClockViewController.swift */; };
@@ -63,6 +63,7 @@
 		CD3A92F41CB9898C00465506 /* BGClockCustomizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGClockCustomizationViewController.swift; sourceTree = "<group>"; };
 		CD3A92F61CB98D3A00465506 /* CustomizeClockSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizeClockSettingsTableViewController.swift; sourceTree = "<group>"; };
 		CD3A933D1CBA9DB900465506 /* CustomizeColorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizeColorTableViewController.swift; sourceTree = "<group>"; };
+		CD47E7D01EB01E42004289EC /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		CD7A14861C95AD9C00D8E06F /* ClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClockViewController.swift; sourceTree = "<group>"; };
 		CD7DBD2D1C93D3D000ED9F20 /* BGClockDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BGClockDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD7DBD301C93D3D000ED9F20 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,7 +82,6 @@
 		CD7DBD641C93D43A00ED9F20 /* TimeZoneLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeZoneLocation.swift; sourceTree = "<group>"; };
 		CD7DBD6E1C93D48000ED9F20 /* Coordinates.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Coordinates.txt; sourceTree = "<group>"; };
 		CD7DBD6F1C93D48000ED9F20 /* CSwiftV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSwiftV.swift; sourceTree = "<group>"; };
-		CD7DBD721C93D49000ED9F20 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		CD7DBD741C93D4A400ED9F20 /* CityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityTableViewController.swift; sourceTree = "<group>"; };
 		CD7DBD781C93D4CF00ED9F20 /* VectorMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorMath.swift; sourceTree = "<group>"; };
 		CD7DBD801C93D51500ED9F20 /* BGWorldClockViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BGWorldClockViewController.swift; sourceTree = "<group>"; };
@@ -177,7 +177,7 @@
 				CD7DBD641C93D43A00ED9F20 /* TimeZoneLocation.swift */,
 				CD7DBD781C93D4CF00ED9F20 /* VectorMath.swift */,
 				CD7DBD6F1C93D48000ED9F20 /* CSwiftV.swift */,
-				CD7DBD721C93D49000ED9F20 /* SwiftyJSON.swift */,
+				CD47E7D01EB01E42004289EC /* SwiftyJSON.swift */,
 				CD7DBD6E1C93D48000ED9F20 /* Coordinates.txt */,
 				CDC09B101CC44A4200AC20DC /* 320.json */,
 				CDC09B111CC44A4200AC20DC /* 375.json */,
@@ -274,19 +274,22 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Brad G.";
 				TargetAttributes = {
 					CD7DBD2C1C93D3D000ED9F20 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 8DDUQH2RUD;
+						LastSwiftMigration = 0830;
 					};
 					CD7DBD421C93D3D000ED9F20 = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0830;
 						TestTargetID = CD7DBD2C1C93D3D000ED9F20;
 					};
 					CD7DBD4D1C93D3D000ED9F20 = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0830;
 						TestTargetID = CD7DBD2C1C93D3D000ED9F20;
 					};
 				};
@@ -354,12 +357,12 @@
 				CDC09B0D1CBDD12D00AC20DC /* BGFlipTransition.swift in Sources */,
 				CDC09B0E1CBDD12D00AC20DC /* BGTransitions.swift in Sources */,
 				CD3A92F51CB9898C00465506 /* BGClockCustomizationViewController.swift in Sources */,
+				CD47E7D11EB01E42004289EC /* SwiftyJSON.swift in Sources */,
 				CDE2E8831C99850B00A8062E /* WorldClockSettingsTableViewController.swift in Sources */,
 				CD7DBD7D1C93D4CF00ED9F20 /* VectorMath.swift in Sources */,
 				CD7DBD611C93D42600ED9F20 /* WebServicesManager.swift in Sources */,
 				CD7DBD631C93D43000ED9F20 /* TimeZoneManager.swift in Sources */,
 				CDC09B0F1CBDD12D00AC20DC /* BGViewSnapShot.swift in Sources */,
-				CD7DBD731C93D49000ED9F20 /* SwiftyJSON.swift in Sources */,
 				CDC300761C947D1700EE5A56 /* WorldClockMapAnnotationView.swift in Sources */,
 				CD3A92F71CB98D3A00465506 /* CustomizeClockSettingsTableViewController.swift in Sources */,
 				CD7DBD651C93D43A00ED9F20 /* TimeZoneLocation.swift in Sources */,
@@ -438,8 +441,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -483,8 +488,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -503,6 +510,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -519,6 +527,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = bradgayman.BGClockDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -534,6 +543,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = bradgayman.BGClockDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -546,6 +556,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = bradgayman.BGClockDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BGClockDemo.app/BGClockDemo";
 			};
 			name = Debug;
@@ -558,6 +569,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = bradgayman.BGClockDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BGClockDemo.app/BGClockDemo";
 			};
 			name = Release;
@@ -569,6 +581,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = bradgayman.BGClockDemoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = BGClockDemo;
 				USES_XCTRUNNER = YES;
 			};
@@ -581,6 +594,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = bradgayman.BGClockDemoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = BGClockDemo;
 				USES_XCTRUNNER = YES;
 			};

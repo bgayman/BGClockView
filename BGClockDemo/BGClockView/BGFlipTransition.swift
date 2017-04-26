@@ -8,6 +8,30 @@
 
 import Foundation
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 
 
@@ -15,42 +39,42 @@ typealias CompletionBlock = (Bool)->()
 
 enum BGFlipStyle
 {
-    case FowardHorizontalRegularPerspective
-    case FowardHorizontalReversePerspective
-    case FowardVerticalRegularPerspective
-    case FowardVerticalReversePerspective
-    case BackwardHorizontalRegularPerspective
-    case BackwardHorizontalReversePerspective
-    case BackwardVerticalRegularPerspective
-    case BackwardVerticalReversePerspective
+    case fowardHorizontalRegularPerspective
+    case fowardHorizontalReversePerspective
+    case fowardVerticalRegularPerspective
+    case fowardVerticalReversePerspective
+    case backwardHorizontalRegularPerspective
+    case backwardHorizontalReversePerspective
+    case backwardVerticalRegularPerspective
+    case backwardVerticalReversePerspective
 }
 
 public extension UIView
 {
-    public class func subViewIsAboveSubview(subView1:UIView,subView2:UIView) -> Bool
+    public class func subViewIsAboveSubview(_ subView1:UIView,subView2:UIView) -> Bool
     {
         let superview = subView1.superview
-        let index1 = superview?.subviews.indexOf(subView1)
-        let index2 = superview?.subviews.indexOf(subView2)
+        let index1 = superview?.subviews.index(of: subView1)
+        let index2 = superview?.subviews.index(of: subView2)
         
         if index2 == NSNotFound
         {
-            NSException.raise("Invalid Operation", format: "Both views must have the same superview", arguments: CVaListPointer(_fromUnsafeMutablePointer: nil))
+            fatalError("Both views must have same superview")
         }
         return index1 > index2
     }
     
-    public class func subViewIsBelowSubView(subView1:UIView,subView2:UIView) -> Bool
+    public class func subViewIsBelowSubView(_ subView1:UIView,subView2:UIView) -> Bool
     {
         return self.subViewIsAboveSubview(subView2, subView2: subView1)
     }
     
-    public func aboveSiblingView(siblingView:UIView) -> Bool
+    public func aboveSiblingView(_ siblingView:UIView) -> Bool
     {
         return UIView.subViewIsAboveSubview(self, subView2: siblingView)
     }
     
-    public func belowSiblingView(siblingView:UIView) -> Bool
+    public func belowSiblingView(_ siblingView:UIView) -> Bool
     {
         return UIView.subViewIsAboveSubview(siblingView, subView2: self)
     }
@@ -76,47 +100,47 @@ class BGFlipTransition: BGTransitions {
     var layerRevealShadow:CALayer?
     var flipStage:Int
     
-    init(sourceView:UIView,destinationView:UIView,duration:NSTimeInterval,style:BGFlipStyle,completionAction:BGTransitionAction)
+    init(sourceView:UIView,destinationView:UIView,duration:TimeInterval,style:BGFlipStyle,completionAction:BGTransitionAction)
     {
         self.style = style
         self.coveredPageShadowOpacity = 1.0/3.0
         self.flippingPageShadowOpacity = 0.1
-        self.flipShadowColor = UIColor.blackColor()
+        self.flipShadowColor = UIColor.black
         self.layersBuilt = false
         self.destinationViewShown = false
         self.flipStage = 0
         
-        super.init(sourceView: sourceView, destinationView: destinationView, duration: duration, timingCurve: .EaseIn, completionAction: completionAction)
+        super.init(sourceView: sourceView, destinationView: destinationView, duration: duration, timingCurve: .easeIn, completionAction: completionAction)
     }
     
     func timingCurveFunctionNameFirstHalf() -> String
     {
         switch self.timingCurve{
-        case .EaseIn:
+        case .easeIn:
             return kCAMediaTimingFunctionEaseIn
-        case .EaseInOut:
+        case .easeInOut:
             return kCAMediaTimingFunctionEaseIn
-        case .EaseOut:
+        case .easeOut:
             return kCAMediaTimingFunctionLinear
-        case .Linear:
+        case .linear:
             return kCAMediaTimingFunctionLinear
         }
     }
     
     func timingCurveFunctionNameSecondHalf() -> String {
         switch self.timingCurve{
-        case .EaseOut:
+        case .easeOut:
             return kCAMediaTimingFunctionEaseOut
-        case .EaseInOut:
+        case .easeInOut:
             return kCAMediaTimingFunctionEaseOut
-        case .EaseIn:
+        case .easeIn:
             return kCAMediaTimingFunctionLinear
-        case .Linear:
+        case .linear:
             return kCAMediaTimingFunctionLinear
         }
     }
     
-    func switchToStage(stageIndex:Int)
+    func switchToStage(_ stageIndex:Int)
     {
         CATransaction.begin()
         CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
@@ -151,12 +175,12 @@ class BGFlipTransition: BGTransitions {
             return
         }
         
-        let forwards = (self.style == .FowardHorizontalRegularPerspective || self.style == .FowardHorizontalReversePerspective || self.style == .FowardVerticalRegularPerspective || self.style == .FowardVerticalReversePerspective)
-        let vertical = (self.style == .BackwardVerticalRegularPerspective || self.style == .BackwardVerticalReversePerspective || self.style == .FowardVerticalRegularPerspective || self.style == .FowardVerticalReversePerspective)
-        let inward = (self.style == .BackwardHorizontalReversePerspective || self.style == .BackwardVerticalReversePerspective || self.style == .FowardVerticalReversePerspective || self.style == .FowardHorizontalReversePerspective)
+        let forwards = (self.style == .fowardHorizontalRegularPerspective || self.style == .fowardHorizontalReversePerspective || self.style == .fowardVerticalRegularPerspective || self.style == .fowardVerticalReversePerspective)
+        let vertical = (self.style == .backwardVerticalRegularPerspective || self.style == .backwardVerticalReversePerspective || self.style == .fowardVerticalRegularPerspective || self.style == .fowardVerticalReversePerspective)
+        let inward = (self.style == .backwardHorizontalReversePerspective || self.style == .backwardVerticalReversePerspective || self.style == .fowardVerticalReversePerspective || self.style == .fowardHorizontalReversePerspective)
         
         let bounds = self.calculateRect()
-        let scale = UIScreen.mainScreen().scale
+        let scale = UIScreen.main.scale
         
         let inset = vertical ? UIEdgeInsets(top: 0.0, left: 1.0, bottom: 0.0, right: 1.0) : UIEdgeInsets(top: 1.0, left: 0.0, bottom: 1.0, right: 0.0)
         
@@ -204,12 +228,12 @@ class BGFlipTransition: BGTransitions {
             }
             else
             {
-                self.destinationView.bounds = CGRect(origin: CGPointZero, size: bounds.size)
+                self.destinationView.bounds = CGRect(origin: CGPoint.zero, size: bounds.size)
             }
         }
         
-        var destUpperRect = CGRectOffset(upperRect, -upperRect.origin.x, -upperRect.origin.y)
-        var destLowerRect = CGRectOffset(lowerRect, -upperRect.origin.x, -upperRect.origin.y)
+        var destUpperRect = upperRect.offsetBy(dx: -upperRect.origin.x, dy: -upperRect.origin.y)
+        var destLowerRect = lowerRect.offsetBy(dx: -upperRect.origin.x, dy: -upperRect.origin.y)
         
         if self.dismissing
         {
@@ -221,7 +245,7 @@ class BGFlipTransition: BGTransitions {
             destUpperRect.origin.y += y
             if !self.presentedControllerIncludesStatusBarInFrame
             {
-                self.rect = CGRectOffset(self.rect, x, y)
+                self.rect = self.rect.offsetBy(dx: x, dy: y)
             }
         }
         else if self.presentedControllerIncludesStatusBarInFrame
@@ -248,24 +272,24 @@ class BGFlipTransition: BGTransitions {
         var drawReveal = false
         
         switch self.completionAction{
-        case .AddRemove:
+        case .addRemove:
             if !isModal
             {
                 self.destinationView.frame = self.sourceView.frame
             }
             containerView?.addSubview(self.destinationView)
             break
-        case .ShowHide:
-            self.destinationView.hidden = false
+        case .showHide:
+            self.destinationView.isHidden = false
             isDestinationViewAbove = self.destinationView.aboveSiblingView(self.sourceView)
             break
-        case .None:
+        case .none:
             if self.destinationView.superview == self.sourceView.superview
             {
                 isDestinationViewAbove = self.destinationView.aboveSiblingView(self.sourceView)
-                if self.destinationView.hidden
+                if self.destinationView.isHidden
                 {
-                    self.destinationView.hidden = false
+                    self.destinationView.isHidden = false
                     self.destinationViewShown = true
                 }
             }
@@ -276,9 +300,9 @@ class BGFlipTransition: BGTransitions {
             else
             {
                 drawReveal = true
-                if self.destinationView.hidden
+                if self.destinationView.isHidden
                 {
-                    self.destinationView.hidden = false
+                    self.destinationView.isHidden = false
                     self.destinationViewShown = true
                 }
             }
@@ -295,17 +319,17 @@ class BGFlipTransition: BGTransitions {
         let height = vertical ? bounds.size.height * 0.5 : bounds.size.width * 0.5
         let upperHeight = round(height * scale) / scale
         
-        var mainRect = containerView?.convertRect(self.rect, fromView: actingSource)
-        let center = CGPoint(x: CGRectGetMidX(mainRect!), y: CGRectGetMidY(mainRect!))
+        var mainRect = containerView?.convert(self.rect, from: actingSource)
+        let center = CGPoint(x: mainRect!.midX, y: mainRect!.midY)
         if isModal
         {
-            mainRect = actingSource.convertRect(mainRect!, fromView: nil)
+            mainRect = actingSource.convert(mainRect!, from: nil)
         }
         
         self.animationView = UIView(frame: mainRect!)
-        self.animationView?.backgroundColor = UIColor.clearColor()
+        self.animationView?.backgroundColor = UIColor.clear
         self.animationView?.transform = actingSource.transform
-        self.animationView?.autoresizingMask = [.FlexibleTopMargin , .FlexibleLeftMargin , .FlexibleRightMargin , .FlexibleBottomMargin]
+        self.animationView?.autoresizingMask = [.flexibleTopMargin , .flexibleLeftMargin , .flexibleRightMargin , .flexibleBottomMargin]
         containerView?.addSubview(self.animationView!)
         
         if isModal
@@ -314,55 +338,55 @@ class BGFlipTransition: BGTransitions {
         }
         
         self.layerReveal = CALayer()
-        self.layerReveal?.frame = CGRect(origin: CGPointZero, size: drawReveal ? pageRevealImage!.size : forwards ? destLowerRect.size :destUpperRect.size)
+        self.layerReveal?.frame = CGRect(origin: CGPoint.zero, size: drawReveal ? pageRevealImage!.size : forwards ? destLowerRect.size :destUpperRect.size)
         self.layerReveal?.anchorPoint = CGPoint(x: vertical ? 0.5 : forwards ? 0 : 1, y: vertical ? forwards ? 0 : 1 : 0.5)
         self.layerReveal?.position = CGPoint(x: vertical ? width * 0.5 : upperHeight, y: vertical ? upperHeight : width * 0.5)
         if drawReveal
         {
-            self.layerReveal?.contents = pageRevealImage?.CGImage
+            self.layerReveal?.contents = pageRevealImage?.cgImage
         }
         self.animationView?.layer.addSublayer(self.layerReveal!)
         
         self.layerFacing = CALayer()
-        self.layerFacing?.frame = CGRect(origin: CGPointZero, size: drawFacing ? pageFacingImage!.size : forwards ? upperRect.size : lowerRect.size)
+        self.layerFacing?.frame = CGRect(origin: CGPoint.zero, size: drawFacing ? pageFacingImage!.size : forwards ? upperRect.size : lowerRect.size)
         self.layerFacing!.anchorPoint = CGPoint(x: vertical ? 0.5 : forwards ? 1 : 0, y: vertical ? forwards ? 1 : 0 : 0.5)
         self.layerFacing?.position = CGPoint(x: vertical ?  width * 0.5 : upperHeight, y: vertical ? upperHeight : width * 0.5)
         if drawFacing
         {
-            self.layerFacing?.contents = pageFacingImage?.CGImage
+            self.layerFacing?.contents = pageFacingImage?.cgImage
         }
         self.animationView?.layer.addSublayer(self.layerFacing!)
         
         self.revealLayerMask = CAShapeLayer()
         let maskRect = (forwards == isDestinationViewAbove) ? destLowerRect : destUpperRect
-        self.revealLayerMask?.path = UIBezierPath(rect: maskRect).CGPath
+        self.revealLayerMask?.path = UIBezierPath(rect: maskRect).cgPath
         let viewToMask = isDestinationViewAbove ? self.destinationView : self.sourceView
         viewToMask.layer.mask = self.revealLayerMask
         
         self.layerFront = CALayer()
-        self.layerFront?.frame = CGRect(origin: CGPointZero, size: pageFrontImage.size)
+        self.layerFront?.frame = CGRect(origin: CGPoint.zero, size: pageFrontImage.size)
         self.layerFront!.anchorPoint = CGPoint(x: vertical ? 0.5 : forwards ? 0 : 1, y: vertical ? forwards ? 0 : 1 : 0.5)
         self.layerFront?.position = CGPoint(x: vertical ? width * 0.5 : upperHeight, y: vertical ? upperHeight : width * 0.5)
-        self.layerFront?.contents = pageFrontImage.CGImage
+        self.layerFront?.contents = pageFrontImage.cgImage
         self.animationView?.layer.addSublayer(self.layerFront!)
         
         self.layerBack = CALayer()
-        self.layerBack?.frame = CGRect(origin: CGPointZero, size: pageBackImage.size)
+        self.layerBack?.frame = CGRect(origin: CGPoint.zero, size: pageBackImage.size)
         self.layerBack!.anchorPoint = CGPoint(x: vertical ? 0.5 : forwards ? 1 : 0, y: vertical ? forwards ? 1 : 0 : 0.5)
         self.layerBack?.position = CGPoint(x: vertical ? width * 0.5 : upperHeight, y: vertical ? upperHeight : width * 0.5)
-        self.layerBack?.contents = pageBackImage.CGImage
+        self.layerBack?.contents = pageBackImage.cgImage
         
         self.layerFrontShadow = CAGradientLayer()
         self.layerFront?.addSublayer(self.layerFrontShadow!)
-        self.layerFrontShadow?.frame = CGRectInset(self.layerFront!.bounds, inset.left, inset.top)
+        self.layerFrontShadow?.frame = self.layerFront!.bounds.insetBy(dx: inset.left, dy: inset.top)
         self.layerFrontShadow?.opacity = 0.0
         if forwards
         {
-            self.layerFrontShadow?.colors = [self.flipShadowColor.colorWithAlphaComponent(0.5).CGColor, self.flipShadowColor.CGColor, UIColor.clearColor()]
+            self.layerFrontShadow?.colors = [self.flipShadowColor.withAlphaComponent(0.5).cgColor, self.flipShadowColor.cgColor, UIColor.clear]
         }
         else
         {
-            self.layerFrontShadow?.colors = [UIColor.clearColor(),self.flipShadowColor.CGColor,self.flipShadowColor.colorWithAlphaComponent(0.5).CGColor]
+            self.layerFrontShadow?.colors = [UIColor.clear,self.flipShadowColor.cgColor,self.flipShadowColor.withAlphaComponent(0.5).cgColor]
         }
         self.layerFrontShadow?.startPoint = CGPoint(x: vertical ? 0.5 : forwards ? 0 : 0.5, y: vertical ? forwards ? 0 : 0.5 : 0.5)
         self.layerFrontShadow?.endPoint = CGPoint(x: vertical ? 0.5 : forwards ? 0.5 : 1, y: vertical ? forwards ? 0.5 : 1 : 0.5)
@@ -370,15 +394,15 @@ class BGFlipTransition: BGTransitions {
         
         self.layerBackShadow = CAGradientLayer()
         self.layerBack?.addSublayer(self.layerBackShadow!)
-        self.layerBackShadow?.frame = CGRectInset(self.layerBack!.bounds, inset.left, inset.top)
+        self.layerBackShadow?.frame = self.layerBack!.bounds.insetBy(dx: inset.left, dy: inset.top)
         self.layerBackShadow?.opacity = Float(self.flippingPageShadowOpacity)
         if forwards
         {
-            self.layerBackShadow?.colors = [UIColor.clearColor().CGColor, self.flipShadowColor.CGColor,self.flipShadowColor.colorWithAlphaComponent(0.5).CGColor]
+            self.layerBackShadow?.colors = [UIColor.clear.cgColor, self.flipShadowColor.cgColor,self.flipShadowColor.withAlphaComponent(0.5).cgColor]
         }
         else
         {
-            self.layerBackShadow?.colors = [self.flipShadowColor.colorWithAlphaComponent(0.5).CGColor,self.flipShadowColor.CGColor,UIColor.clearColor().CGColor]
+            self.layerBackShadow?.colors = [self.flipShadowColor.withAlphaComponent(0.5).cgColor,self.flipShadowColor.cgColor,UIColor.clear.cgColor]
         }
         self.layerBackShadow?.startPoint = CGPoint(x: vertical ? 0.5 : forwards ? 0.5 : 0, y: vertical ? forwards ? 0.5 : 0 : 0.5)
         self.layerBackShadow?.endPoint = CGPoint(x: vertical ? 0.5 :forwards ? 1 : 0.5, y: vertical ? forwards ? 1 : 0.5 : 0.5)
@@ -389,12 +413,12 @@ class BGFlipTransition: BGTransitions {
             self.layerRevealShadow = CALayer()
             self.layerReveal?.addSublayer(self.layerRevealShadow!)
             self.layerRevealShadow?.frame = self.layerReveal!.bounds
-            self.layerRevealShadow?.backgroundColor = self.flipShadowColor.CGColor
+            self.layerRevealShadow?.backgroundColor = self.flipShadowColor.cgColor
             self.layerRevealShadow?.opacity = Float(self.coveredPageShadowOpacity)
             
             self.layerFacingShadow = CALayer()
             self.layerFacingShadow?.frame = self.layerFacing!.bounds
-            self.layerFacingShadow?.backgroundColor = self.flipShadowColor.CGColor
+            self.layerFacingShadow?.backgroundColor = self.flipShadowColor.cgColor
             self.layerFacingShadow?.opacity = 0.0
         }
         
@@ -443,18 +467,18 @@ class BGFlipTransition: BGTransitions {
         self.layersBuilt = false
     }
     
-    override func perform(completion: CompletionBlock?) {
+    override func perform(_ completion: CompletionBlock?) {
         self.buildLayers()
         self.doFlip2(0)
         self.animateFlip1(false,fromProgress:0,completion:completion!)
     }
     
-    func animateFlip1(isFallingBack:Bool,fromProgress:CGFloat,completion:CompletionBlock?)
+    func animateFlip1(_ isFallingBack:Bool,fromProgress:CGFloat,completion:CompletionBlock?)
     {
         var fromP = fromProgress
-        let forwards = (self.style == .FowardHorizontalRegularPerspective || self.style == .FowardHorizontalReversePerspective || self.style == .FowardVerticalRegularPerspective || self.style == .FowardVerticalReversePerspective)
-        let vertical = (self.style == .BackwardVerticalRegularPerspective || self.style == .BackwardVerticalReversePerspective || self.style == .FowardVerticalRegularPerspective || self.style == .FowardVerticalReversePerspective)
-        let inward = (self.style == .BackwardHorizontalReversePerspective || self.style == .BackwardVerticalReversePerspective || self.style == .FowardVerticalReversePerspective || self.style == .FowardHorizontalReversePerspective)
+        let forwards = (self.style == .fowardHorizontalRegularPerspective || self.style == .fowardHorizontalReversePerspective || self.style == .fowardVerticalRegularPerspective || self.style == .fowardVerticalReversePerspective)
+        let vertical = (self.style == .backwardVerticalRegularPerspective || self.style == .backwardVerticalReversePerspective || self.style == .fowardVerticalRegularPerspective || self.style == .fowardVerticalReversePerspective)
+        let inward = (self.style == .backwardHorizontalReversePerspective || self.style == .backwardVerticalReversePerspective || self.style == .fowardVerticalReversePerspective || self.style == .fowardHorizontalReversePerspective)
         
         let layer = isFallingBack ? self.layerBack : self.layerFront
         let flippingShadow = isFallingBack ? self.layerBackShadow : self.layerFrontShadow
@@ -471,7 +495,7 @@ class BGFlipTransition: BGTransitions {
         let frameCount:Int = Int(ceil(dur * 60))
         
         let rotationKey = vertical ? "transform.rotation.x" : "transform.rotation.y"
-        let factor = (isFallingBack ? -1 : 1) * (forwards ? -1 : 1) * (vertical ? -1 : 1) * M_PI / 180.0
+        let factor = (isFallingBack ? -1 : 1) * (forwards ? -1 : 1) * (vertical ? -1 : 1) * .pi / 180.0
         
         CATransaction.begin()
         CATransaction.setValue(dur, forKey: kCATransactionAnimationDuration)
@@ -487,16 +511,16 @@ class BGFlipTransition: BGTransitions {
         animation.fromValue = 90.0 * factor * Double(fromProgress)
         animation.toValue = 90.0 * factor
         animation.fillMode = kCAFillModeForwards
-        animation.removedOnCompletion = false
-        layer?.addAnimation(animation, forKey: nil)
+        animation.isRemovedOnCompletion = false
+        layer?.add(animation, forKey: nil)
         layer?.transform = CATransform3DMakeRotation(90.0 * CGFloat(factor), vertical ? 1 : 0, vertical ? 0 : 1, 0)
         
         animation = CABasicAnimation(keyPath: "opacity")
         animation.fromValue = self.flippingPageShadowOpacity * fromProgress
         animation.toValue = self.flippingPageShadowOpacity
         animation.fillMode = kCAFillModeForwards
-        animation.removedOnCompletion = false
-        flippingShadow?.addAnimation(animation, forKey: nil)
+        animation.isRemovedOnCompletion = false
+        flippingShadow?.add(animation, forKey: nil)
         flippingShadow?.opacity = Float(self.flippingPageShadowOpacity)
         
         if !inward
@@ -517,8 +541,8 @@ class BGFlipTransition: BGTransitions {
             let keyAnimation = CAKeyframeAnimation(keyPath: "opacity")
             keyAnimation.values = arrayOpacity
             keyAnimation.fillMode = kCAFillModeForwards
-            keyAnimation.removedOnCompletion = false
-            coveredShadow?.addAnimation(keyAnimation, forKey: nil)
+            keyAnimation.isRemovedOnCompletion = false
+            coveredShadow?.add(keyAnimation, forKey: nil)
             coveredShadow?.opacity = Float(arrayOpacity.last!)
             
             
@@ -526,12 +550,12 @@ class BGFlipTransition: BGTransitions {
         CATransaction.commit()
     }
     
-    func animateFlip2(isFallingBack:Bool,fromProgress:CGFloat,completion:CompletionBlock?)
+    func animateFlip2(_ isFallingBack:Bool,fromProgress:CGFloat,completion:CompletionBlock?)
     {
         var fromP = fromProgress
-        let forwards = (self.style == .FowardHorizontalRegularPerspective || self.style == .FowardHorizontalReversePerspective || self.style == .FowardVerticalRegularPerspective || self.style == .FowardVerticalReversePerspective)
-        let vertical = (self.style == .BackwardVerticalRegularPerspective || self.style == .BackwardVerticalReversePerspective || self.style == .FowardVerticalRegularPerspective || self.style == .FowardVerticalReversePerspective)
-        let inward = (self.style == .BackwardHorizontalReversePerspective || self.style == .BackwardVerticalReversePerspective || self.style == .FowardVerticalReversePerspective || self.style == .FowardHorizontalReversePerspective)
+        let forwards = (self.style == .fowardHorizontalRegularPerspective || self.style == .fowardHorizontalReversePerspective || self.style == .fowardVerticalRegularPerspective || self.style == .fowardVerticalReversePerspective)
+        let vertical = (self.style == .backwardVerticalRegularPerspective || self.style == .backwardVerticalReversePerspective || self.style == .fowardVerticalRegularPerspective || self.style == .fowardVerticalReversePerspective)
+        let inward = (self.style == .backwardHorizontalReversePerspective || self.style == .backwardVerticalReversePerspective || self.style == .fowardVerticalReversePerspective || self.style == .fowardHorizontalReversePerspective)
         
         let layer = isFallingBack ? self.layerFront : self.layerBack
         let flippingShadow = isFallingBack ? self.layerFrontShadow : self.layerBackShadow
@@ -540,7 +564,7 @@ class BGFlipTransition: BGTransitions {
         let frameCount:Int = Int(ceil(self.duration * 0.5 * 60))
         
         let rotationKey = vertical ? "transform.rotation.x" : "transform.rotation.y"
-        let factor = (isFallingBack ? -1 : 1) * (forwards ? -1 : 1) * (vertical ? -1 : 1) * M_PI / 180.0
+        let factor = (isFallingBack ? -1 : 1) * (forwards ? -1 : 1) * (vertical ? -1 : 1) * .pi / 180.0
 
         if isFallingBack
         {
@@ -564,16 +588,16 @@ class BGFlipTransition: BGTransitions {
         animation2.fromValue = -90.0 * factor * Double(1-fromProgress)
         animation2.toValue = 0
         animation2.fillMode = kCAFillModeForwards
-        animation2.removedOnCompletion = false
-        layer?.addAnimation(animation2, forKey: nil)
+        animation2.isRemovedOnCompletion = false
+        layer?.add(animation2, forKey: nil)
         layer?.transform = CATransform3DIdentity
         
         animation2 = CABasicAnimation(keyPath: "opacity")
         animation2.fromValue = self.flippingPageShadowOpacity * (1 - fromProgress)
         animation2.toValue = 0
         animation2.fillMode = kCAFillModeForwards
-        animation2.removedOnCompletion = false
-        flippingShadow?.addAnimation(animation2, forKey: nil)
+        animation2.isRemovedOnCompletion = false
+        flippingShadow?.add(animation2, forKey: nil)
         flippingShadow?.opacity = Float(0)
         
         if !inward
@@ -594,14 +618,14 @@ class BGFlipTransition: BGTransitions {
             let keyAnimation = CAKeyframeAnimation(keyPath: "opacity")
             keyAnimation.values = arrayOpacity
             keyAnimation.fillMode = kCAFillModeForwards
-            keyAnimation.removedOnCompletion = false
-            coveredShadow?.addAnimation(keyAnimation, forKey: nil)
+            keyAnimation.isRemovedOnCompletion = false
+            coveredShadow?.add(keyAnimation, forKey: nil)
             coveredShadow?.opacity = Float(arrayOpacity.last!)
         }
         CATransaction.commit()
     }
     
-    func doFlip1(progress:CGFloat)
+    func doFlip1(_ progress:CGFloat)
     {
         var p = progress
         CATransaction.begin()
@@ -623,7 +647,7 @@ class BGFlipTransition: BGTransitions {
         CATransaction.commit()
     }
     
-    func doFlip2(progress:CGFloat)
+    func doFlip2(_ progress:CGFloat)
     {
         var p = progress
         CATransaction.begin()
@@ -644,29 +668,29 @@ class BGFlipTransition: BGTransitions {
         CATransaction.commit()
     }
     
-    func flipTransform1(progress:CGFloat) -> CATransform3D
+    func flipTransform1(_ progress:CGFloat) -> CATransform3D
     {
         var tHalf1 = CATransform3DIdentity
         
-        let forwards = (self.style == .FowardHorizontalRegularPerspective || self.style == .FowardHorizontalReversePerspective || self.style == .FowardVerticalRegularPerspective || self.style == .FowardVerticalReversePerspective)
-        let vertical = (self.style == .BackwardVerticalRegularPerspective || self.style == .BackwardVerticalReversePerspective || self.style == .FowardVerticalRegularPerspective || self.style == .FowardVerticalReversePerspective)
+        let forwards = (self.style == .fowardHorizontalRegularPerspective || self.style == .fowardHorizontalReversePerspective || self.style == .fowardVerticalRegularPerspective || self.style == .fowardVerticalReversePerspective)
+        let vertical = (self.style == .backwardVerticalRegularPerspective || self.style == .backwardVerticalReversePerspective || self.style == .fowardVerticalRegularPerspective || self.style == .fowardVerticalReversePerspective)
         tHalf1 = CATransform3DRotate(tHalf1, degreesToRadians(90.0 * progress * (forwards ? -1 : 1)), vertical ? -1 : 0, vertical ? 0 : 1, 0)
         return tHalf1
     }
     
-    func flipTransform2(progress:CGFloat) ->CATransform3D
+    func flipTransform2(_ progress:CGFloat) ->CATransform3D
     {
         var tHalf2 = CATransform3DIdentity
         
-        let forwards = (self.style == .FowardHorizontalRegularPerspective || self.style == .FowardHorizontalReversePerspective || self.style == .FowardVerticalRegularPerspective || self.style == .FowardVerticalReversePerspective)
-        let vertical = (self.style == .BackwardVerticalRegularPerspective || self.style == .BackwardVerticalReversePerspective || self.style == .FowardVerticalRegularPerspective || self.style == .FowardVerticalReversePerspective)
+        let forwards = (self.style == .fowardHorizontalRegularPerspective || self.style == .fowardHorizontalReversePerspective || self.style == .fowardVerticalRegularPerspective || self.style == .fowardVerticalReversePerspective)
+        let vertical = (self.style == .backwardVerticalRegularPerspective || self.style == .backwardVerticalReversePerspective || self.style == .fowardVerticalRegularPerspective || self.style == .fowardVerticalReversePerspective)
         tHalf2 = CATransform3DRotate(tHalf2, degreesToRadians(90.0 * (1 - progress) * (forwards ? 1 : -1)), vertical ? -1 : 0, vertical ? 0 : 1, 0)
         return tHalf2
     }
     
-    private func degreesToRadians(degrees:CGFloat) -> CGFloat
+    fileprivate func degreesToRadians(_ degrees:CGFloat) -> CGFloat
     {
-        return degrees * CGFloat(M_PI) / 180.0
+        return degrees * CGFloat.pi / 180.0
     }
     
     /*override func transitionDidComplete() 
@@ -689,21 +713,21 @@ class BGFlipTransition: BGTransitions {
     
     //MARK: - Class Methods
     
-    class func transitionFromViewController(fromController:UIViewController, toController:UIViewController,dur:NSTimeInterval,sty:BGFlipStyle,completion:CompletionBlock?)
+    class func transitionFromViewController(_ fromController:UIViewController, toController:UIViewController,dur:TimeInterval,sty:BGFlipStyle,completion:CompletionBlock?)
     {
-        let flipTransation = BGFlipTransition(sourceView: fromController.view, destinationView: toController.view, duration: dur, style: sty, completionAction: .None)
+        let flipTransation = BGFlipTransition(sourceView: fromController.view, destinationView: toController.view, duration: dur, style: sty, completionAction: .none)
         flipTransation.perform(completion)
     }
     
-    class func transitionFromView(fromView:UIView,toView:UIView,dur:NSTimeInterval,sty:BGFlipStyle,act:BGTransitionAction,completion:CompletionBlock?)
+    class func transitionFromView(_ fromView:UIView,toView:UIView,dur:TimeInterval,sty:BGFlipStyle,act:BGTransitionAction,completion:CompletionBlock?)
     {
         let flipTransation = BGFlipTransition(sourceView: fromView, destinationView: toView, duration: dur, style: sty, completionAction: act)
         flipTransation.perform(completion)
     }
     
-    class func presentViewController(viewControllerToPresent:UIViewController,presentingViewController:UIViewController,dur:NSTimeInterval,sty:BGFlipStyle,completion:CompletionBlock?)
+    class func presentViewController(_ viewControllerToPresent:UIViewController,presentingViewController:UIViewController,dur:TimeInterval,sty:BGFlipStyle,completion:CompletionBlock?)
     {
-        let flipTransition = BGFlipTransition(sourceView: presentingViewController.view, destinationView: viewControllerToPresent.view, duration: dur, style: sty, completionAction: .None)
+        let flipTransition = BGFlipTransition(sourceView: presentingViewController.view, destinationView: viewControllerToPresent.view, duration: dur, style: sty, completionAction: .none)
         
         flipTransition.setPresentingController(presentingViewController)
         flipTransition.setPresentedController(viewControllerToPresent)
@@ -711,8 +735,8 @@ class BGFlipTransition: BGTransitions {
         flipTransition.perform({(finished:Bool) in
             if finished
             {
-                presentingViewController.modalPresentationStyle = .FullScreen
-                presentingViewController.presentViewController(viewControllerToPresent, animated: false, completion: {
+                presentingViewController.modalPresentationStyle = .fullScreen
+                presentingViewController.present(viewControllerToPresent, animated: false, completion: {
                     if completion != nil
                     {
                         completion!(true)
@@ -722,7 +746,7 @@ class BGFlipTransition: BGTransitions {
         })
     }
     
-    class func dismissViewControllerFromPresentingController(presentingController:UIViewController,dur:NSTimeInterval,sty:BGFlipStyle,completion:CompletionBlock?)
+    class func dismissViewControllerFromPresentingController(_ presentingController:UIViewController,dur:TimeInterval,sty:BGFlipStyle,completion:CompletionBlock?)
     {
         let src = presentingController.presentedViewController
         if src == nil
@@ -733,18 +757,18 @@ class BGFlipTransition: BGTransitions {
         
         while true
         {
-            if dest.parentViewController == nil
+            if dest.parent == nil
             {
                 break
             }
-            dest  = dest.parentViewController!
+            dest  = dest.parent!
         }
-        let flipTransition = BGFlipTransition(sourceView: src!.view, destinationView: dest.view, duration: dur, style: sty, completionAction: .None)
+        let flipTransition = BGFlipTransition(sourceView: src!.view, destinationView: dest.view, duration: dur, style: sty, completionAction: .none)
         flipTransition.dismissing = true
         flipTransition.setPresentedController(src!)
-        presentingController.dismissViewControllerAnimated(false, completion: nil)
+        presentingController.dismiss(animated: false, completion: nil)
         flipTransition.perform({(Bool) in
-            dest.view.hidden = false
+            dest.view.isHidden = false
             if completion != nil
             {
                 completion!(true)

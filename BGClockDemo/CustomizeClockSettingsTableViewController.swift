@@ -13,88 +13,88 @@ class CustomizeClockSettingsTableViewController: UITableViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .Plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.tableView.reloadData()
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let cell = self.tableView.cellForRowAtIndexPath(indexPath)
+        let cell = self.tableView.cellForRow(at: indexPath)
         let title = cell?.textLabel?.text
         if indexPath.section == 0
         {
-            NSUserDefaults.standardUserDefaults().setObject(title, forKey: "customizeFaceStyle")
+            UserDefaults.standard.set(title, forKey: "customizeFaceStyle")
         }
         else if indexPath.section == 1
         {
-            NSUserDefaults.standardUserDefaults().setObject(title, forKey: "customizeHandStyle")
+            UserDefaults.standard.set(title, forKey: "customizeHandStyle")
         }
         else if indexPath.section == 2
         {
-            NSUserDefaults.standardUserDefaults().setObject(title, forKey: "customizeFont")
+            UserDefaults.standard.set(title, forKey: "customizeFont")
         }
-        NSUserDefaults.standardUserDefaults().synchronize()
-        self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: .None)
+        UserDefaults.standard.synchronize()
+        self.tableView.reloadSections(IndexSet(integer: indexPath.section), with: .none)
     }
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        let faceStyle = NSUserDefaults.standardUserDefaults().objectForKey("customizeFaceStyle") as? String
-        let handStyle = NSUserDefaults.standardUserDefaults().objectForKey("customizeHandStyle") as? String
-        let font = NSUserDefaults.standardUserDefaults().objectForKey("customizeFont") as? String
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let faceStyle = UserDefaults.standard.object(forKey: "customizeFaceStyle") as? String
+        let handStyle = UserDefaults.standard.object(forKey: "customizeHandStyle") as? String
+        let font = UserDefaults.standard.object(forKey: "customizeFont") as? String
         switch indexPath.section {
         case 0:
             let title = cell.textLabel!.text
             if title == faceStyle
             {
-                cell.accessoryType = .Checkmark
+                cell.accessoryType = .checkmark
             }
             else if faceStyle == nil && title == ".Swiss"
             {
-                cell.accessoryType = .Checkmark
+                cell.accessoryType = .checkmark
             }
             else
             {
-                cell.accessoryType = .None
+                cell.accessoryType = .none
             }
         case 1:
             let title = cell.textLabel!.text
             if title == handStyle
             {
-                cell.accessoryType = .Checkmark
+                cell.accessoryType = .checkmark
             }
             else if handStyle == nil && title == ".Swiss"
             {
-                cell.accessoryType = .Checkmark
+                cell.accessoryType = .checkmark
             }
             else
             {
-                cell.accessoryType = .None
+                cell.accessoryType = .none
             }
             break
         case 2:
             let title = cell.textLabel!.text
             if title == font
             {
-                cell.accessoryType = .Checkmark
+                cell.accessoryType = .checkmark
             }
             else if font == nil && title == ".SFUIText-Regular"
             {
-                cell.accessoryType = .Checkmark
+                cell.accessoryType = .checkmark
             }
             else
             {
-                cell.accessoryType = .None
+                cell.accessoryType = .none
             }
             break
         case 3:
-            cell.accessoryType = .DisclosureIndicator
-            if let title = NSUserDefaults.standardUserDefaults().objectForKey("Minute Tick Color") as? String
+            cell.accessoryType = .disclosureIndicator
+            if let title = UserDefaults.standard.object(forKey: "Minute Tick Color") as? String
             {
-                cell.textLabel?.text = title.capitalizedString
+                cell.textLabel?.text = title.capitalized
             }
             else
             {
@@ -102,10 +102,10 @@ class CustomizeClockSettingsTableViewController: UITableViewController {
             }
             break
         case 4:
-            cell.accessoryType = .DisclosureIndicator
-            if let title = NSUserDefaults.standardUserDefaults().objectForKey("Second Tick Color") as? String
+            cell.accessoryType = .disclosureIndicator
+            if let title = UserDefaults.standard.object(forKey: "Second Tick Color") as? String
             {
-                cell.textLabel?.text = title.capitalizedString
+                cell.textLabel?.text = title.capitalized
             }
             else
             {
@@ -113,10 +113,10 @@ class CustomizeClockSettingsTableViewController: UITableViewController {
             }
             break
         case 5:
-            cell.accessoryType = .DisclosureIndicator
-            if let title = NSUserDefaults.standardUserDefaults().objectForKey("Text Color") as? String
+            cell.accessoryType = .disclosureIndicator
+            if let title = UserDefaults.standard.object(forKey: "Text Color") as? String
             {
-                cell.textLabel?.text = title.capitalizedString
+                cell.textLabel?.text = title.capitalized
             }
             else
             {
@@ -124,10 +124,10 @@ class CustomizeClockSettingsTableViewController: UITableViewController {
             }
             break
         case 6:
-            cell.accessoryType = .DisclosureIndicator
-            if let title = NSUserDefaults.standardUserDefaults().objectForKey("Hour Hand Color") as? String
+            cell.accessoryType = .disclosureIndicator
+            if let title = UserDefaults.standard.object(forKey: "Hour Hand Color") as? String
             {
-                cell.textLabel?.text = title.capitalizedString
+                cell.textLabel?.text = title.capitalized
             }
             else
             {
@@ -135,10 +135,10 @@ class CustomizeClockSettingsTableViewController: UITableViewController {
             }
             break
         case 7:
-            cell.accessoryType = .DisclosureIndicator
-            if let title = NSUserDefaults.standardUserDefaults().objectForKey("Minute Hand Color") as? String
+            cell.accessoryType = .disclosureIndicator
+            if let title = UserDefaults.standard.object(forKey: "Minute Hand Color") as? String
             {
-                cell.textLabel?.text = title.capitalizedString
+                cell.textLabel?.text = title.capitalized
             }
             else
             {
@@ -146,10 +146,10 @@ class CustomizeClockSettingsTableViewController: UITableViewController {
             }
             break
         case 8:
-            cell.accessoryType = .DisclosureIndicator
-            if let title = NSUserDefaults.standardUserDefaults().objectForKey("Second Hand Color") as? String
+            cell.accessoryType = .disclosureIndicator
+            if let title = UserDefaults.standard.object(forKey: "Second Hand Color") as? String
             {
-                cell.textLabel?.text = title.capitalizedString
+                cell.textLabel?.text = title.capitalized
             }
             else
             {
@@ -157,11 +157,11 @@ class CustomizeClockSettingsTableViewController: UITableViewController {
             }
             break
         case 9:
-            if (NSUserDefaults.standardUserDefaults().objectForKey((cell.textLabel?.text)!) != nil) {
-                let isOn = NSUserDefaults.standardUserDefaults().boolForKey((cell.textLabel?.text)!)
+            if (UserDefaults.standard.object(forKey: (cell.textLabel?.text)!) != nil) {
+                let isOn = UserDefaults.standard.bool(forKey: (cell.textLabel?.text)!)
                 if let switchView = cell.accessoryView as? UISwitch
                 {
-                    switchView.on = isOn
+                    switchView.isOn = isOn
                 }
                 
             }
@@ -171,11 +171,11 @@ class CustomizeClockSettingsTableViewController: UITableViewController {
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let cell = sender as? UITableViewCell
         {
-            let indexPath = self.tableView.indexPathForCell(cell)
-            if let colorVC = segue.destinationViewController as? CustomizeColorTableViewController
+            let indexPath = self.tableView.indexPath(for: cell)
+            if let colorVC = segue.destination as? CustomizeColorTableViewController
             {
                 if indexPath?.section == 3
                 {
@@ -212,16 +212,16 @@ class CustomizeClockSettingsTableViewController: UITableViewController {
         }
     }
     
-    @IBAction func switchChanged(sender: UISwitch) {
-        let location = self.tableView.convertPoint(sender.bounds.origin, fromView: sender)
-        let indexPath = self.tableView.indexPathForRowAtPoint(location)
-        let cell = self.tableView.cellForRowAtIndexPath(indexPath!)
-        NSUserDefaults.standardUserDefaults().setBool(sender.on, forKey: (cell!.textLabel?.text)!)
-        NSUserDefaults.standardUserDefaults().synchronize()
+    @IBAction func switchChanged(_ sender: UISwitch) {
+        let location = self.tableView.convert(sender.bounds.origin, from: sender)
+        let indexPath = self.tableView.indexPathForRow(at: location)
+        let cell = self.tableView.cellForRow(at: indexPath!)
+        UserDefaults.standard.set(sender.isOn, forKey: (cell!.textLabel?.text)!)
+        UserDefaults.standard.synchronize()
 
     }
-    @IBAction func done(sender: UIBarButtonItem)
+    @IBAction func done(_ sender: UIBarButtonItem)
     {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 }

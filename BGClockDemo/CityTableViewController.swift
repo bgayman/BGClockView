@@ -9,11 +9,11 @@
 import UIKit
 
 protocol CityTableDelegate {
-    func didSaveTimeZoneLocations(timeZoneLocations:[TimeZoneLocation])
+    func didSaveTimeZoneLocations(_ timeZoneLocations:[TimeZoneLocation])
 }
 
 class CityTableViewController: UITableViewController,UISearchBarDelegate,UISearchDisplayDelegate {
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var cityArray:[TimeZoneLocation]{
         get{
             return self.appDelegate.timeZoneManager.allTimeZones
@@ -25,7 +25,7 @@ class CityTableViewController: UITableViewController,UISearchBarDelegate,UISearc
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.tintColor = UIColor.blackColor()
+        self.navigationController?.navigationBar.tintColor = UIColor.black
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,11 +34,11 @@ class CityTableViewController: UITableViewController,UISearchBarDelegate,UISearc
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.searchDisplayController!.searchResultsTableView {
             return self.searchResultsCities?.count ?? 0
         }
@@ -46,29 +46,29 @@ class CityTableViewController: UITableViewController,UISearchBarDelegate,UISearc
     }
 
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-        cell.accessoryType = .None
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        cell.accessoryType = .none
         if tableView == self.searchDisplayController!.searchResultsTableView {
             let timeZoneName = searchResultsCities![indexPath.row].timeZoneName
-            if self.saveTimeZoneLocations.indexOf({$0.timeZoneName == timeZoneName}) != nil {
-                cell.accessoryType = .Checkmark
+            if self.saveTimeZoneLocations.index(where: {$0.timeZoneName == timeZoneName}) != nil {
+                cell.accessoryType = .checkmark
             }
             cell.textLabel?.text = searchResultsCities![indexPath.row].displayName
             return cell
         }
         let timeZoneName = cityArray[indexPath.row].timeZoneName
-        if self.saveTimeZoneLocations.indexOf({$0.timeZoneName == timeZoneName}) != nil {
-            cell.accessoryType = .Checkmark
+        if self.saveTimeZoneLocations.index(where: {$0.timeZoneName == timeZoneName}) != nil {
+            cell.accessoryType = .checkmark
         }
         cell.textLabel?.text = cityArray[indexPath.row].displayName
 
         return cell
     }
     
-    override func   tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        cell?.accessoryType = .Checkmark
+    override func   tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.accessoryType = .checkmark
         if tableView == self.searchDisplayController!.searchResultsTableView {
             self.saveTimeZoneLocations.append(self.searchResultsCities![indexPath.row])
         }
@@ -78,23 +78,23 @@ class CityTableViewController: UITableViewController,UISearchBarDelegate,UISearc
         }
     }
     
-    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String?) -> Bool {
+    func searchDisplayController(_ controller: UISearchDisplayController, shouldReloadTableForSearch searchString: String?) -> Bool {
         self.filterContentForSearchText(searchString!)
         return true
     }
     
-    func filterContentForSearchText(searchText: String) {
+    func filterContentForSearchText(_ searchText: String) {
         self.searchResultsCities = self.cityArray.filter({( timeZoneLocation: TimeZoneLocation) -> Bool in
-            return timeZoneLocation.displayName.lowercaseString.rangeOfString(searchText.lowercaseString) != nil
+            return timeZoneLocation.displayName.lowercased().range(of: searchText.lowercased()) != nil
         })
     }
 
-    @IBAction func cancel(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func save(sender: UIBarButtonItem) {
+    @IBAction func save(_ sender: UIBarButtonItem) {
         self.delegate?.didSaveTimeZoneLocations(self.saveTimeZoneLocations)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 }

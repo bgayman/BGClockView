@@ -11,17 +11,17 @@ import Foundation
 //TODO: make these prettier and probably not extensions
 public extension String {
     func splitOnNewLine () -> ([String]) {
-        return self.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
+        return self.components(separatedBy: CharacterSet.newlines)
     }
 }
 
 //MARK: Parser
-public class CSwiftV {
+open class CSwiftV {
     
-    public let columnCount: Int
-    public let headers: [String]
-    public let keyedRows: [[String: String]]?
-    public let rows: [[String]]
+    open let columnCount: Int
+    open let headers: [String]
+    open let keyedRows: [[String: String]]?
+    open let rows: [[String]]
     
     public init(String string: String, headers: [String]?, separator: String) {
         
@@ -31,7 +31,7 @@ public class CSwiftV {
         
         var parsedLines = lines.map{
             (transform: String) -> [String] in
-            let commaSanitized = includeQuotedStringInFields(Fields: transform.componentsSeparatedByString(separator),quotedString: separator)
+            let commaSanitized = includeQuotedStringInFields(Fields: transform.components(separatedBy: separator),quotedString: separator)
                 .map
                 {
                     (input: String) -> String in
@@ -40,7 +40,7 @@ public class CSwiftV {
                 .map
                 {
                     (input: String) -> String in
-                    return input.stringByReplacingOccurrencesOfString("\"\"", withString: "\"", options: NSStringCompareOptions.LiteralSearch)
+                    return input.replacingOccurrences(of: "\"\"", with: "\"", options: NSString.CompareOptions.literal)
             }
             
             return commaSanitized
@@ -53,7 +53,7 @@ public class CSwiftV {
         }
         else {
             tempHeaders = parsedLines[0]
-            parsedLines.removeAtIndex(0)
+            parsedLines.remove(at: 0)
         }
         
         self.rows = parsedLines
@@ -63,7 +63,7 @@ public class CSwiftV {
             
             var row = [String: String]()
             
-            for (index, value) in field.enumerate() {
+            for (index, value) in field.enumerated() {
                 row[tempHeaders[index]] = value
             }
             
@@ -97,7 +97,7 @@ func includeQuotedStringInFields(Fields fields: [String], quotedString: String) 
     
     for field in fields {
         mergedField += field
-        if mergedField.componentsSeparatedByString("\"").count%2 != 1 {
+        if mergedField.components(separatedBy: "\"").count%2 != 1 {
             mergedField += quotedString
             continue
         }
@@ -114,10 +114,10 @@ func sanitizedStringMap(String string: String) -> String {
     let endsWithQuote = string.hasSuffix("\"")
     
     if startsWithQuote && endsWithQuote {
-        let startIndex = string.startIndex.advancedBy(1)
-        let endIndex = string.endIndex.advancedBy(-1)
+        let startIndex = string.characters.index(string.startIndex, offsetBy: 1)
+        let endIndex = string.characters.index(string.endIndex, offsetBy: -1)
         let range = startIndex ..< endIndex
-        let sanitizedField = string.substringWithRange(range)
+        let sanitizedField = string.substring(with: range)
         
         return sanitizedField
     }

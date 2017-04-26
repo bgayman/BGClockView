@@ -19,17 +19,17 @@ extension BGClockView{
         "lavender":UIColor(red:161.0/255.0, green:135.0/255.0, blue:149.0/255.0, alpha:1.0),
         "purple":UIColor(red:134.0/255.0, green:96.0/255.0, blue:245.0/255.0, alpha:1.0),
         "midnight blue":UIColor(red:78.0/255.0, green:111.0/255.0, blue:177.0/255.0, alpha:1.0),
-        "red":UIColor.redColor(),
+        "red":UIColor.red,
         "blue":UIColor(red:28.0/255.0, green:164.0/255.0, blue:251.0/255.0, alpha:1.0),
         "light blue":UIColor(red:89.0/255.0, green:185.0/255.0, blue:213.0/255.0, alpha:1.0),
         "green":UIColor(red:125.0/255.0, green:226.0/255.0, blue:32.0/255.0, alpha:1.0),
         "turquoise":UIColor(red:143.0/255.0, green:205.0/255.0, blue:193.0/255.0, alpha:1.0),
         "yellow":UIColor(red:254.0/255.0, green:237.0/255.0, blue:39.0/255.0, alpha:1.0),
         "orange":UIColor(red:243.0/255.0, green:138.0/255.0, blue:0.0/255.0, alpha:1.0),
-        "black":UIColor.blackColor()]
+        "black":UIColor.black]
     }
     
-    class func colorForString(colorString:String) -> UIColor
+    class func colorForString(_ colorString:String) -> UIColor
     {
         return BGClockView.colorDictionary()[colorString]!
     }
@@ -44,40 +44,40 @@ class BGClockCustomizationViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.tabBarController?.tabBar.tintColor = UIColor.blackColor()
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .Plain, target: nil, action: nil)
-        self.settingsButton.setTitleTextAttributes([NSFontAttributeName:UIFont(name: "FontAwesome", size: 22.0)!], forState: .Normal)
+        self.tabBarController?.tabBar.tintColor = UIColor.black
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
+        self.settingsButton.setTitleTextAttributes([NSFontAttributeName:UIFont(name: "FontAwesome", size: 22.0)!], for: UIControlState())
         
         self.updateClock()
         
         self.clockView.start()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ClockCollectionViewCell.updateClock), name: NSUserDefaultsDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ClockCollectionViewCell.updateClock), name: UserDefaults.didChangeNotification, object: nil)
     }
     
-    override func viewWillAppear(animated: Bool)
+    override func viewWillAppear(_ animated: Bool)
     {
-        self.navigationController?.navigationBar.tintColor = UIColor.blackColor()
+        self.navigationController?.navigationBar.tintColor = UIColor.black
         self.navigationController?.navigationBar.shadowImage = nil
-        self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics: UIBarMetrics.Default)
-        self.tabBarController?.tabBar.barTintColor = UIColor.whiteColor()
-        self.tabBarController?.tabBar.tintColor = UIColor.blackColor()
-        self.tabBarController?.tabBar.translucent = true
-        UIApplication.sharedApplication().statusBarStyle = .Default
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.blackColor()]
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: UIBarMetrics.default)
+        self.tabBarController?.tabBar.barTintColor = UIColor.white
+        self.tabBarController?.tabBar.tintColor = UIColor.black
+        self.tabBarController?.tabBar.isTranslucent = true
+        UIApplication.shared.statusBarStyle = .default
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
     }
     
     func updateClock()
     {
-        let faceStyle = NSUserDefaults.standardUserDefaults().objectForKey("customizeFaceStyle") as? String
-        let handStyle = NSUserDefaults.standardUserDefaults().objectForKey("customizeHandStyle") as? String
-        let font = NSUserDefaults.standardUserDefaults().objectForKey("customizeFont") as? String
-        let minuteTickColorString = NSUserDefaults.standardUserDefaults().objectForKey("Minute Tick Color") as? String
-        let secondTickColorString = NSUserDefaults.standardUserDefaults().objectForKey("Second Tick Color") as? String
-        let textColorString = NSUserDefaults.standardUserDefaults().objectForKey("Text Color") as? String
-        let hourHandColorString = NSUserDefaults.standardUserDefaults().objectForKey("Hour Hand Color") as? String
-        let minuteHandColorString = NSUserDefaults.standardUserDefaults().objectForKey("Minute Hand Color") as? String
-        let secondHandColorString = NSUserDefaults.standardUserDefaults().objectForKey("Second Hand Color") as? String
+        let faceStyle = UserDefaults.standard.object(forKey: "customizeFaceStyle") as? String
+        let handStyle = UserDefaults.standard.object(forKey: "customizeHandStyle") as? String
+        let font = UserDefaults.standard.object(forKey: "customizeFont") as? String
+        let minuteTickColorString = UserDefaults.standard.object(forKey: "Minute Tick Color") as? String
+        let secondTickColorString = UserDefaults.standard.object(forKey: "Second Tick Color") as? String
+        let textColorString = UserDefaults.standard.object(forKey: "Text Color") as? String
+        let hourHandColorString = UserDefaults.standard.object(forKey: "Hour Hand Color") as? String
+        let minuteHandColorString = UserDefaults.standard.object(forKey: "Minute Hand Color") as? String
+        let secondHandColorString = UserDefaults.standard.object(forKey: "Second Hand Color") as? String
         
         if font != nil
         {
@@ -125,22 +125,22 @@ class BGClockCustomizationViewController: UIViewController {
             clockView.minuteHandImage = UIImage(named: "minuteHand")
             clockView.secondHandImage = UIImage(named: "secondHand")
         }
-        if NSUserDefaults.standardUserDefaults().objectForKey("Continuous") != nil
+        if UserDefaults.standard.object(forKey: "Continuous") != nil
         {
-            clockView.continuous = NSUserDefaults.standardUserDefaults().boolForKey("Continuous")
+            clockView.continuous = UserDefaults.standard.bool(forKey: "Continuous")
         }
-        if NSUserDefaults.standardUserDefaults().objectForKey("Hide Date Label") != nil
+        if UserDefaults.standard.object(forKey: "Hide Date Label") != nil
         {
-            clockView.hideDateLabel = NSUserDefaults.standardUserDefaults().boolForKey("Hide Date Label")
+            clockView.hideDateLabel = UserDefaults.standard.bool(forKey: "Hide Date Label")
         }
-        if NSUserDefaults.standardUserDefaults().objectForKey("Has Drop Shadow") != nil
+        if UserDefaults.standard.object(forKey: "Has Drop Shadow") != nil
         {
-            clockView.hasDropShadow = NSUserDefaults.standardUserDefaults().boolForKey("Has Drop Shadow")
+            clockView.hasDropShadow = UserDefaults.standard.bool(forKey: "Has Drop Shadow")
         }
     }
     
     deinit
     {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 }

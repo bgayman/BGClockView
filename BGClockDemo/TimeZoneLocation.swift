@@ -7,6 +7,30 @@
 //
 
 import Foundation
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 struct TimeZoneLocation
 {
@@ -67,106 +91,106 @@ struct TimeZoneLocation
     
     mutating func updateCurrentTime()
     {
-        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        calendar?.timeZone = NSTimeZone(name: self.timeZoneName)!
-        let dateComponents = calendar!.components([.Hour,.Minute], fromDate: NSDate())
+        var calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        calendar.timeZone = TimeZone(identifier: self.timeZoneName)!
+        let dateComponents = (calendar as NSCalendar).components([.hour,.minute], from: Date())
         
         self.currentHour = dateComponents.hour
         self.currentMinute = dateComponents.minute
     }
     
-    func weatherIconForWeatherCondition(weatherCondition:String) -> String
+    func weatherIconForWeatherCondition(_ weatherCondition:String) -> String
     {
         if (self.isDay)
         {
-            if (weatherCondition.rangeOfString("Drizzle") != nil || weatherCondition.rangeOfString("Spray") != nil) {
+            if (weatherCondition.range(of: "Drizzle") != nil || weatherCondition.range(of: "Spray") != nil) {
                 return "";
-            }else if (weatherCondition.rangeOfString("Rain") != nil){
+            }else if (weatherCondition.range(of: "Rain") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Snow") != nil){
+            }else if(weatherCondition.range(of: "Snow") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Ice") != nil || weatherCondition.rangeOfString("Hail") != nil){
+            }else if(weatherCondition.range(of: "Ice") != nil || weatherCondition.range(of: "Hail") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Clear") != nil){
+            }else if(weatherCondition.range(of: "Clear") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Partly Cloudy") != nil || weatherCondition.rangeOfString("Scattered Clouds") != nil){
+            }else if(weatherCondition.range(of: "Partly Cloudy") != nil || weatherCondition.range(of: "Scattered Clouds") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Overcast") != nil){
+            }else if(weatherCondition.range(of: "Overcast") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Mist") != nil || weatherCondition.rangeOfString("Fog") != nil){
+            }else if(weatherCondition.range(of: "Mist") != nil || weatherCondition.range(of: "Fog") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Haze") != nil){
+            }else if (weatherCondition.range(of: "Haze") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Sand") != nil){
+            }else if (weatherCondition.range(of: "Sand") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Rain Showers") != nil){
+            }else if (weatherCondition.range(of: "Rain Showers") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Thunderstorm") != nil){
+            }else if (weatherCondition.range(of: "Thunderstorm") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Mostly Cloudy") != nil){
+            }else if (weatherCondition.range(of: "Mostly Cloudy") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Funnel Cloud") != nil){
+            }else if (weatherCondition.range(of: "Funnel Cloud") != nil){
                 return "";
             }
         }else{
-            if (weatherCondition.rangeOfString("Drizzle") != nil || weatherCondition.rangeOfString("Spray") != nil) {
+            if (weatherCondition.range(of: "Drizzle") != nil || weatherCondition.range(of: "Spray") != nil) {
                 return "";
-            }else if (weatherCondition.rangeOfString("Rain") != nil){
+            }else if (weatherCondition.range(of: "Rain") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Snow") != nil){
+            }else if(weatherCondition.range(of: "Snow") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Ice") != nil || weatherCondition.rangeOfString("Hail") != nil){
+            }else if(weatherCondition.range(of: "Ice") != nil || weatherCondition.range(of: "Hail") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Clear") != nil){
+            }else if(weatherCondition.range(of: "Clear") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Snow") != nil){
+            }else if(weatherCondition.range(of: "Snow") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Partly Cloudy") != nil || weatherCondition.rangeOfString("Scattered Clouds") != nil){
+            }else if(weatherCondition.range(of: "Partly Cloudy") != nil || weatherCondition.range(of: "Scattered Clouds") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Overcast") != nil){
+            }else if(weatherCondition.range(of: "Overcast") != nil){
                 return "";
-            }else if(weatherCondition.rangeOfString("Mist") != nil || weatherCondition.rangeOfString("Fog") != nil){
+            }else if(weatherCondition.range(of: "Mist") != nil || weatherCondition.range(of: "Fog") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Haze") != nil){
+            }else if (weatherCondition.range(of: "Haze") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Sand") != nil){
+            }else if (weatherCondition.range(of: "Sand") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Rain Showers") != nil){
+            }else if (weatherCondition.range(of: "Rain Showers") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Thunderstorm") != nil){
+            }else if (weatherCondition.range(of: "Thunderstorm") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Mostly Cloudy") != nil){
+            }else if (weatherCondition.range(of: "Mostly Cloudy") != nil){
                 return "";
-            }else if (weatherCondition.rangeOfString("Funnel Cloud") != nil){
+            }else if (weatherCondition.range(of: "Funnel Cloud") != nil){
                 return "";
             }
         }
         return "";
     }
     
-    func angleBetweenSurfaceAndSunlightForLat(latitude:Float,longitude:Float) -> Float
+    func angleBetweenSurfaceAndSunlightForLat(_ latitude:Float,longitude:Float) -> Float
     {
-        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        calendar?.timeZone = NSTimeZone(name: "GMT")!
-        let numberOfDaysInYear = calendar!.daysInYear()
-        let dayOfYear = calendar?.ordinalityOfUnit(.Day, inUnit: .Year, forDate: NSDate())
+        var calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        calendar.timeZone = TimeZone(identifier: "GMT")!
+        let numberOfDaysInYear = calendar.daysInYear()
+        let dayOfYear = (calendar as NSCalendar?)?.ordinality(of: .day, in: .year, for: Date())
         let numberOfSecondsInDay = 60 * 60 * 24
         
-        let secondOfToday = calendar?.ordinalityOfUnit(.Second, inUnit: .Day, forDate: NSDate())
+        let secondOfToday = (calendar as NSCalendar?)?.ordinality(of: .second, in: .day, for: Date())
         
         let time = Double(secondOfToday!) / Double(numberOfSecondsInDay)
         
-        var pointingFromEarthToSun = Vector3(x: -cos(Float(2.0 * M_PI) * Float(time)), y:0.0,z:sin(Float(2.0 * M_PI) * Float(time)))
-        let tilt = 23.5 * cos(Float(2.0 * M_PI) * Float(dayOfYear! - 173)) / Float(numberOfDaysInYear!)
+        var pointingFromEarthToSun = Vector3(x: -cos(Float(2.0 * .pi) * Float(time)), y:0.0,z:sin(Float(2.0 * .pi) * Float(time)))
+        let tilt = 23.5 * cos(Float(2.0 * .pi) * Float(dayOfYear! - 173)) / Float(numberOfDaysInYear!)
         
-        let seasonOffset = Vector3(x:0.0,y:-tan(Float(M_PI * 2.0) * (tilt / 360.0)), z:0.0)
+        let seasonOffset = Vector3(x:0.0,y:-tan(Float(.pi * 2.0) * (tilt / 360.0)), z:0.0)
         
         pointingFromEarthToSun = pointingFromEarthToSun + seasonOffset
         
-        pointingFromEarthToSun.normalized()
+        _ = pointingFromEarthToSun.normalized()
         
-        let phi  = Double(longitude) * M_PI / 180.0
-        let theta = Double(latitude) * M_PI / 180.0
+        let phi  = Double(longitude) * .pi / 180.0
+        let theta = Double(latitude) * .pi / 180.0
         let x = Float(cos(phi) * cos(theta))
         let y = Float(cos(phi) * sin(theta))
         let z = Float(sin(phi))
