@@ -16,15 +16,15 @@ Download sample app and copy files in BGClockView folder into your project.
 BGClockView can be initialized either in Storyboard/Xib or through frames. Once initialized, BGClockView is customizable. 
 
 ```Swift
-self.clockView.textColor = UIColor.lightGrayColor()
-self.clockView.face = .Normal
-self.clockView.hand = .Swiss
+self.clockView.textColor = .lightGray
+self.clockView.face = .normal
+self.clockView.hand = .swiss
 self.clockView.faceFont = UIFont(name: "Noteworthy-Bold", size: 14.0)!
-self.clockView.minuteTickColor = UIColor.blackColor()
-self.clockView.minuteHandColor = UIColor.blueColor()
-self.clockView.hourHandColor = UIColor.orangeColor()
-self.clockView.secondHandColor = UIColor.redColor()
-self.clockView.screwColor = UIColor.blackColor()
+self.clockView.minuteTickColor = .black
+self.clockView.minuteHandColor = .blue
+self.clockView.hourHandColor = .orange
+self.clockView.secondHandColor = .red
+self.clockView.screwColor = .black
 self.clockView.timeZoneNameString = "Asia/Tokyo"
 self.clockView.hideDateLabel = true
 self.clockView.continuous = false
@@ -35,7 +35,9 @@ Will produce this rather hideous clock.
 <img style="border: gray 1px solid;" width="320px" src="./Screenshot5.png"></img>
 
 # Features
+
 ###Clock faces
+
 BGClockView has the following clock faces that are available through the face property:
 ```Swift
 enum FaceStyle
