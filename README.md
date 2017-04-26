@@ -42,18 +42,18 @@ BGClockView has the following clock faces that are available through the face pr
 ```Swift
 enum FaceStyle
 {
-    case Swiss
-    case Normal
-    case Simple
-    case Utility
-    case BigBen
-    case Melting
-    case Minimal
-    case Plain
-    case Square
-    case Chrono
-    case Flip
-    case Zulu
+    case swiss
+    case normal
+    case simple
+    case utility
+    case bigBen
+    case melting
+    case minimal
+    case plain
+    case square
+    case chrono
+    case flip
+    case zulu
 }
 ```
 ### Hand styles
@@ -61,13 +61,13 @@ BGClockView has the following clock hands that are available through the hand pr
 ```Swift
 enum HandStyle
 {
-    case Swiss
-    case AppleWatch
-    case Chrono
-    case BigBen
-    case Melting
-    case Minimal
-    case Plain
+    case swiss
+    case appleWatch
+    case chrono
+    case bigBen
+    case melting
+    case minimal
+    case plain
 }
 ```
 ### Images
@@ -86,7 +86,7 @@ You can set a clock's time zone through the `timeZoneNameString`
 If you would like to use BGClockView to display a static time you can call `setClockToTime(day:Int,hour:Int,minute:Int,second:Int,weekday:Int)`
 For example:
 ```Swift
-self.clockView.setClockToTime(1, hour: 10, minute: 9, second: 30, weekday: 6)
+self.clockView.setClockToTime(day: 1, hour: 10, minute: 9, second: 30, weekday: 6)
 ```
 Will set the clock to the Saturday, the 1st, 10:09:30 am.
 If using autolayout, this method should be called after the layout engine has finished its passes e.g. `viewDidLayoutSubviews`
