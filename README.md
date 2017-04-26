@@ -90,7 +90,8 @@ self.clockView.setClockToTime(1, hour: 10, minute: 9, second: 30, weekday: 6)
 ```
 Will set the clock to the Saturday, the 1st, 10:09:30 am.
 If using autolayout, this method should be called after the layout engine has finished its passes e.g. `viewDidLayoutSubviews`
-#Gotcha's
+
+# Gotcha's
 Some properties are overloaded. And some properties don't apply to all clock faces. You can use the demo app's customization tab to find these.
 
 Also, **🙀 Please forgive the incredibly confusing code in some of the classes. This is my first Swift project and optional chaining and other Swift features could have been better used amongst other things🙀**
