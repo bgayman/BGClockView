@@ -36,7 +36,7 @@ Will produce this rather hideous clock.
 
 # Features
 
-###Clock faces
+### Clock faces
 
 BGClockView has the following clock faces that are available through the face property:
 ```Swift
@@ -56,7 +56,7 @@ enum FaceStyle
     case Zulu
 }
 ```
-###Hand styles
+### Hand styles
 BGClockView has the following clock hands that are available through the hand property:
 ```Swift
 enum HandStyle
@@ -70,7 +70,7 @@ enum HandStyle
     case Plain
 }
 ```
-###Images
+### Images
 In addition you can replace the clock face and hands with prerendered images by setting the `clockFaceImage`,`hourHandImage`,`minuteHandImage`, and `secondHandImage` properties. For example:
 
 ```Swift
@@ -79,10 +79,10 @@ clockView.hourHandImage = UIImage(named: "hourHand")
 clockView.minuteHandImage = UIImage(named: "minuteHand")
 clockView.secondHandImage = UIImage(named: "secondHand")
 ```
-###Time Zones
+### Time Zones
 You can set a clock's time zone through the `timeZoneNameString`
 
-###Static times
+### Static times
 If you would like to use BGClockView to display a static time you can call `setClockToTime(day:Int,hour:Int,minute:Int,second:Int,weekday:Int)`
 For example:
 ```Swift
@@ -95,6 +95,6 @@ Some properties are overloaded. And some properties don't apply to all clock fac
 
 Also, **🙀 Please forgive the incredibly confusing code in some of the classes. This is my first Swift project and optional chaining and other Swift features could have been better used amongst other things🙀**
 
-#License
+# License
 This project is licensed under The MIT License (MIT)
 Copyright (c) 2016
